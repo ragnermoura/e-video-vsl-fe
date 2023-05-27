@@ -12,7 +12,7 @@
                 <div class="p-5">
                   <div class="text-center">
                     <img
-                      src="../../assets/images/logo.jpg"
+                      src="../../assets/images/logo.png"
                       class="img-fluid mb-4"
                       alt=""
                       srcset=""
@@ -65,7 +65,7 @@
                     </div>
                     <button
                       type="submit"
-                      style="background-color: #9c0c49; border: none"
+                      style="background-color: #f0502e; border: none"
                       class="btn btn-primary btn-user btn-block mt-4"
                     >
                       Login
@@ -110,7 +110,14 @@ export default {
 };
 </script>
 <style>
-body{
-  background-image: url('../../assets/images/patern.jpg');
+#background-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
 }
 </style>
