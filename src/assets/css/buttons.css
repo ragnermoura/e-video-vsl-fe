@@ -1,0 +1,21 @@
+.btnPrimary {
+  background-color:rgba(0, 255, 255, 0) ;
+  border: 1px solid #fff;
+  margin-top: 5%;
+  width: 100%;
+  height: 50px;
+  border-radius: 60px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.btnSecondary{
+  background-color:#f2750f;
+  border: 1px solid #fff;
+  margin-top: 5%;
+  width: 100%;
+  height: 50px;
+  border-radius: 60px;
+  color: #fff;
+  text-transform: uppercase;
+}
