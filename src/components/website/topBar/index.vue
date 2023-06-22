@@ -14,6 +14,3 @@ export default {
     name:'Topbar'
 }
 </script>
-<style>
-@import url('../../../assets/css/topbar.css');
-</style>

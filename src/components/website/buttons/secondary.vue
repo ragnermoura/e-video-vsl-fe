@@ -8,6 +8,3 @@ export default {
     name:"ButtonSecondary"
 }
 </script>
-<style>
-@import url('../../../assets/css/buttons.css');
-</style>

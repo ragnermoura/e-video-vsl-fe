@@ -160,13 +160,16 @@
                 height="300"
                 :src="videoEmbedUrl"
                 frameborder="0"
+                showinfo="0"
+                controls="0"
+                autoplay="1"
               ></iframe>
               <div
                 class="play-button"
                 v-show="!videoPlaying"
                 @click="playVideo"
               >
-               <i class="fa fa-play fa-5x"></i>
+                <i class="fa fa-play fa-5x"></i>
               </div>
             </div>
           </div>
@@ -261,7 +264,3 @@ export default {
   },
 };
 </script>
-
-<style>
-@import url("../../assets/css/navbar.css");
-</style>
