@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Container, Play, Progress, Video } from "./styles";
 import { FaPlay, FaVolumeMute } from "react-icons/fa";
-export default ({color}) => {
+export default ({color, text, caminhoVideo, caminhoThumb}) => {
   const [currentProgress, setCurrentProgress] = useState(0);
   const videoRef = useRef(null);
   const video = videoRef.current;
@@ -35,7 +35,7 @@ export default ({color}) => {
 
     video.currentTime = 0;
     setIsAuto(false);
-    setPlayed(false);
+    setPlayed(true);
     video?.play();
   };
 
@@ -44,18 +44,19 @@ export default ({color}) => {
       <Video
         autoPlay
         muted
-        src="http://localhost:3001/videos/1688496284905.mp4"
+        poster={caminhoThumb}
+        src={caminhoVideo}
         ref={videoRef}
         onTimeUpdate={handleUpdateProgress}
         onClick={handlePlay}
       ></Video>
-      <Progress cor={color} value={currentProgress} max={100} />
-      {isAuto && <Play cor={color} autoPlay={isAuto} onClick={handleRestartAndUnmuted}>
-        <FaVolumeMute size={32}/>
-        <span>Ativar o som</span>
+      <Progress cor={color ?? '#f03939'} value={currentProgress} max={100} />
+      {isAuto && <Play cor={color ?? '#f03939'} autoPlay={isAuto} onClick={handleRestartAndUnmuted}>
+        <FaVolumeMute size={50}/>
+        <span style={{fontSize: 32, fontWeight: 700}}>{ text !== '' ? text : 'Ativar o som'}</span>
         </Play>}
       {!isAuto && !played && (
-        <Play cor={color} autoPlay={isAuto} onClick={handlePlay}>
+        <Play cor={color ?? '#f03939'} autoPlay={isAuto} onClick={handlePlay}>
             <FaPlay />
         </Play>
       )}

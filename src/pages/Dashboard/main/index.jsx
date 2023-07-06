@@ -3,6 +3,7 @@ import MasterMenu from "../../../components/masterMenu";
 import NavBar from "../../../components/navBar";
 import Footer from "../../../components/footer";
 import { FaTrash } from "react-icons/fa6";
+import { FaLink } from "react-icons/fa6";
 
 export default () => {
   return (
@@ -99,9 +100,9 @@ export default () => {
                             <span class="fw-semibold d-block mb-1">
                               Seus Videos
                             </span>
-                            <h3 class="card-title mb-2">050</h3>
+                            <h3 class="card-title mb-2">00</h3>
                             <small class="text-success fw-semibold">
-                              <i class="bx bx-up-arrow-alt"></i> +5
+                              <i class="bx bx-up-arrow-alt"></i> +0
                             </small>
                           </div>
                         </div>
@@ -118,7 +119,7 @@ export default () => {
                   <div class="col-6 mb-4">
                     <div class="card">
                       <div class="card-body">
-                      <div class="card-title">
+                        <div class="card-title">
                           <h5 class="text-nowrap mb-2">
                             Comparativo de Tempo visualizado
                           </h5>
@@ -154,9 +155,9 @@ export default () => {
                             </div>
                             <div class="mt-sm-auto">
                               <small class="text-success text-nowrap fw-semibold">
-                                <i class="bx bx-chevron-up"></i> 68.2%
+                                <i class="bx bx-chevron-up"></i> 0%
                               </small>
-                              <h3 class="mb-0">1800</h3>
+                              <h3 class="mb-0">0</h3>
                             </div>
                           </div>
                           <div id="profileReportChart"></div>
@@ -171,16 +172,16 @@ export default () => {
                         <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
                           <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                             <div class="card-title">
-                              <h5 class="text-nowrap mb-2">Profile Report</h5>
+                              <h5 class="text-nowrap mb-2">Conversões</h5>
                               <span class="badge bg-label-danger rounded-pill">
-                                Year 2021
+                                Ano 2021
                               </span>
                             </div>
                             <div class="mt-sm-auto">
                               <small class="text-success text-nowrap fw-semibold">
-                                <i class="bx bx-chevron-up"></i> 68.2%
+                                <i class="bx bx-chevron-up"></i> 0%
                               </small>
-                              <h3 class="mb-0">R$ 84,686k</h3>
+                              <h3 class="mb-0">0</h3>
                             </div>
                           </div>
                           <div id="profileReportChart"></div>
@@ -195,16 +196,16 @@ export default () => {
                         <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
                           <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                             <div class="card-title">
-                              <h5 class="text-nowrap mb-2">Profile Report</h5>
-                              <span class="badge bg-label-warning rounded-pill">
-                                Year 2021
+                              <h5 class="text-nowrap mb-2">Perdas</h5>
+                              <span class="badge bg-label-danger rounded-pill">
+                                Ano 2021
                               </span>
                             </div>
                             <div class="mt-sm-auto">
                               <small class="text-success text-nowrap fw-semibold">
-                                <i class="bx bx-chevron-up"></i> 68.2%
+                                <i class="bx bx-chevron-up"></i> 0%
                               </small>
-                              <h3 class="mb-0">R$ 84,686k</h3>
+                              <h3 class="mb-0">0</h3>
                             </div>
                           </div>
                           <div id="profileReportChart"></div>
@@ -218,9 +219,7 @@ export default () => {
                       <div class="card-header d-flex align-items-center justify-content-between pb-0">
                         <div class="card-title mb-0">
                           <h5 class="m-0 me-2">Compartivo de Rede Sociais</h5>
-                          <small class="text-muted">
-                            42.82k dados analizados
-                          </small>
+                          <small class="text-muted">0 dados analizados</small>
                         </div>
                         <div class="dropdown">
                           <button
@@ -252,7 +251,7 @@ export default () => {
                       <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                           <div class="d-flex flex-column align-items-center gap-1">
-                            <h2 class="mb-2">3.67509</h2>
+                            <h2 class="mb-2">0</h2>
                             <span>Total Orders</span>
                           </div>
                           <div id="orderStatisticsChart"></div>
@@ -270,7 +269,7 @@ export default () => {
                                 <small class="text-muted">Visualizações</small>
                               </div>
                               <div class="user-progress">
-                                <small class="fw-semibold">82.5k</small>
+                                <small class="fw-semibold">0</small>
                               </div>
                             </div>
                           </li>
@@ -286,7 +285,7 @@ export default () => {
                                 <small class="text-muted">Visualizações</small>
                               </div>
                               <div class="user-progress">
-                                <small class="fw-semibold">23.8k</small>
+                                <small class="fw-semibold">0</small>
                               </div>
                             </div>
                           </li>
@@ -302,7 +301,7 @@ export default () => {
                                 <small class="text-muted">Visualizações</small>
                               </div>
                               <div class="user-progress">
-                                <small class="fw-semibold">849k</small>
+                                <small class="fw-semibold">0</small>
                               </div>
                             </div>
                           </li>
@@ -318,7 +317,7 @@ export default () => {
                                 <small class="text-muted">Visualizações</small>
                               </div>
                               <div class="user-progress">
-                                <small class="fw-semibold">99</small>
+                                <small class="fw-semibold">0</small>
                               </div>
                             </div>
                           </li>
@@ -373,13 +372,13 @@ export default () => {
                             <tr>
                               <th scope="row"></th>
                               <td></td>
-                              <td>6:50</td>
+                              <td></td>
                               <td></td>
                               <td>
-                                <button class="btn btn-success btn-sm"></button>
+                               
 
-                                <button class="btn btn-warning btn-sm"></button>
-
+                                <button class="btn btn-warning btn-sm" style={{marginRight: 4}}>  <FaLink /></button>
+                              
                                 <button class="btn btn-danger btn-sm">
                                   <FaTrash />
                                 </button>
