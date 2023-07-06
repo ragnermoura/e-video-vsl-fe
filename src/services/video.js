@@ -25,6 +25,18 @@ export const videoApi = {
         }
         )
 
+    },
+
+    getVideos: async (id_user) => {
+
+        return await api.get(`/videos/upload-image/${id_video}`, data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                Accept: "application/json",
+            }
+        }
+        )
+
     }
 
 
