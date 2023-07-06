@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Container, Play, Progress, Video } from "./styles";
 import { FaPlay, FaVolumeMute } from "react-icons/fa";
+import Sound from '../../assets/img/noSound.gif'
 export default ({color, text, caminhoVideo, caminhoThumb}) => {
   const [currentProgress, setCurrentProgress] = useState(0);
   const videoRef = useRef(null);
@@ -52,8 +53,10 @@ export default ({color, text, caminhoVideo, caminhoThumb}) => {
       ></Video>
       <Progress cor={color ?? '#f03939'} value={currentProgress} max={100} />
       {isAuto && <Play cor={color ?? '#f03939'} autoPlay={isAuto} onClick={handleRestartAndUnmuted}>
-        <FaVolumeMute size={50}/>
-        <span style={{fontSize: 32, fontWeight: 700}}>{ text !== '' ? text : 'Ativar o som'}</span>
+      <span style={{fontSize: 18, fontWeight: 500}}>Seu video já começou</span>
+        <img src={Sound} style={{borderRadius: 80, width: 60, marginTop: 10}} alt="" srcset="" />
+        {/* <FaVolumeMute size={50}/> */}
+        <span style={{fontSize: 20, fontWeight: 500}}>{ text !== '' ? text : 'Ativar o som'}</span>
         </Play>}
       {!isAuto && !played && (
         <Play cor={color ?? '#f03939'} autoPlay={isAuto} onClick={handlePlay}>

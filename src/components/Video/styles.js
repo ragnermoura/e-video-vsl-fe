@@ -24,8 +24,8 @@ export const Play = styled.button`
   font-size: 16px;
   cursor: pointer;
   border-radius: 10px;
-  height: ${(props) => (props?.autoPlay ? "180px" : "60px")};
-  width: ${(props) => (props?.autoPlay ? "250px" : "60px")};
+  height: ${(props) => (props?.autoPlay ? "150px" : "60px")};
+  width: ${(props) => (props?.autoPlay ? "290px" : "60px")};
   display: flex;
   flex-direction: column;
   justify-content: center;
