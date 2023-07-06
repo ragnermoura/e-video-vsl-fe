@@ -5,6 +5,7 @@ import Plano from "./pages/Plano";
 import Pagamento from "./pages/Pagamento";
 import Main from "./pages/Dashboard/main";
 import Create from "./pages/Dashboard/criacao";
+import MeusVideos from "./pages/Dashboard/meusVideos";
 
 
 
@@ -17,6 +18,7 @@ export default() => {
             <Route path="/pagamento" element={<Pagamento/>} />
             <Route path="/dashboard-main" element={<Main/>} />
             <Route path="/area-criacao" element={<Create/>} />
+            <Route path="/meus-videos" element={<MeusVideos/>} />
         </Routes>
     )
 }
