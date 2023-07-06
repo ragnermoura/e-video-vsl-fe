@@ -1,4 +1,5 @@
 import { Container } from "./styles";
+import Simbol from '../../assets/img/simbol.png'
 
 export default () => {
   return (
@@ -33,7 +34,7 @@ export default () => {
                 <li class="nav-item lh-1 me-3">
                   <a
                     class="github-button"
-                    href="https://github.com/themeselection/sneat-html-admin-template-free"
+                    href=""
                     data-icon="octicon-star"
                     data-size="large"
                     data-show-count="true"
@@ -46,7 +47,7 @@ export default () => {
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="./src/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src={Simbol} alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -55,7 +56,7 @@ export default () => {
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="./assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src={Simbol} style={{width: 80}} alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">

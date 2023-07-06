@@ -8,6 +8,7 @@ import Create from "./pages/Dashboard/criacao";
 import MeusVideos from "./pages/Dashboard/meusVideos";
 import VideoPage from "./pages/Dashboard/VideoPage";
 import FullVideoPage from "./pages/Dashboard/FullVideoPage";
+import Afiliado from "./pages/Dashboard/Afiliado";
 
 
 
@@ -23,6 +24,7 @@ export default() => {
             <Route path="/meus-videos" element={<MeusVideos/>} />
             <Route path="/video/:id_video" element={<VideoPage/>} />
             <Route path="/full-video/:id_video" element={<FullVideoPage/>} />
+            <Route path="/afiliados" element={<Afiliado/>} />
         </Routes>
     )
 }
