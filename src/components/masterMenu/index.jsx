@@ -132,7 +132,7 @@ export default () => {
             <span class="menu-header-text">Gestão</span>
           </li>
           <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <a href="/meus-videos" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bx-play"></i>
               <div data-i18n="Account Settings">Meus vídeos</div>
             </a>

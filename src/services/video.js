@@ -29,9 +29,21 @@ export const videoApi = {
 
     getVideos: async (id_user) => {
 
-        return await api.get(`/videos/upload-image/${id_video}`, data, {
+        return await api.get(`/videos/get/${id_user}`, {
             headers: {
-                "Content-Type": "multipart/form-data",
+                'Content-Type': "application/json",
+                Accept: "application/json",
+            }
+        }
+        )
+
+    },
+
+    getVideobyId: async (id_video) => {
+
+        return await api.get(`/videos/get-by-id/${id_video}`, {
+            headers: {
+                'Content-Type': "application/json",
                 Accept: "application/json",
             }
         }
