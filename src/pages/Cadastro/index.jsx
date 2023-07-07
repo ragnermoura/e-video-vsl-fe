@@ -1,7 +1,34 @@
 import { Container } from "./styles";
 import Logo from '../../assets/img/logo.png'
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { authApi } from "../../services/auth";
 
 export default () => {
+
+  const navigate = useNavigate()
+
+  const [user, setUser] = useState({
+    nome: '',
+    sobrenome: '',
+    email: '',
+    senha: ''
+  })
+
+  const handleCadastro = async () => {
+
+    const res = await authApi.cadastro(user)
+    console.log(res)
+    console.log(res?.data)
+    if(res?.data?.success){
+      console.log('loguei')
+
+      navigate('/login')
+
+    }
+
+  }
+
   return (
     <Container>
       <div class="container-xxl">
@@ -27,12 +54,7 @@ export default () => {
                 <h4 class="mb-2">A venda começa aqui 🚀</h4>
                 <p class="mb-4">Insira seus dados e comece a diversão</p>
 
-                <form
-                  id="formAuthentication"
-                  class="mb-3"
-                  action="index.html"
-                  method="POST"
-                >
+                
                   <div class="mb-3">
                     <label for="username" class="form-label">
                       Nome
@@ -44,6 +66,7 @@ export default () => {
                       name="nome"
                       placeholder="Insira seu Nome"
                       autofocus
+                      onChange={e => setUser({...user, nome: e.target.value})}
                     />
                   </div>
                   <div class="mb-3">
@@ -55,6 +78,7 @@ export default () => {
                       class="form-control"
                       id="sobrenome"
                       name="sobrenome"
+                      onChange={e => setUser({...user, sobrenome: e.target.value})}
                       placeholder="insira seu Sobrenome"
                       autofocus
                     />
@@ -69,6 +93,7 @@ export default () => {
                       id="email"
                       name="email"
                       placeholder="Insira seu melhor email"
+                      onChange={e => setUser({...user, email: e.target.value})}
                     />
                   </div>
                   <div class="mb-3 form-password-toggle">
@@ -83,6 +108,7 @@ export default () => {
                         name="password"
                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                         aria-describedby="password"
+                        onChange={e => setUser({...user, senha: e.target.value})}
                       />
                       <span class="input-group-text cursor-pointer">
                         <i class="bx bx-hide"></i>
@@ -104,10 +130,10 @@ export default () => {
                       </label>
                     </div>
                   </div>
-                  <button class="btn btn-primary d-grid w-100">
+                  <button onClick={handleCadastro} class="btn btn-primary d-grid w-100">
                     Tudo pronto
                   </button>
-                </form>
+                
 
                 <p class="text-center">
                   <span>Já tem uma conta?</span>

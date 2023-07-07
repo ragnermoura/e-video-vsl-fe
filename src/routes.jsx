@@ -15,7 +15,7 @@ import Afiliado from "./pages/Dashboard/Afiliado";
 export default() => {
     return(
         <Routes>
-            <Route path="/login" element={<Login/>} />
+            <Route path="/" element={<Login/>} />
             <Route path="/cadastro" element={<Cadastro/>} />
             <Route path="/plano" element={<Plano/>} />
             <Route path="/pagamento" element={<Pagamento/>} />

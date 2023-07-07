@@ -1,7 +1,34 @@
 import { Container } from "./styles";
 import Logo from '../../assets/img/logo.png'
+import { useState } from "react";
+import { authApi } from "../../services/auth";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
+
+  const navigate = useNavigate()
+
+  const [user, setUser] = useState({
+    email: '',
+    senha: ''
+  })
+
+  const handleLogin = async () => {
+
+    const res = await authApi.login(user)
+    console.log(res)
+    console.log(res?.data)
+    if(res?.data?.success){
+      console.log('loguei')
+      localStorage.setItem('userId', res?.data?.user_id)
+      localStorage.setItem('token', res?.data?.token)
+
+      navigate('/dashboard-main')
+
+    }
+
+  }
+
   return (
     <Container>
       <div class="container-xxl">
@@ -23,12 +50,7 @@ export default () => {
                   Por favor, insira seus dados para entrar na plataforma.
                 </p>
 
-                <form
-                  id="formAuthentication"
-                  class="mb-3"
-                  action="index.html"
-                  method="POST"
-                >
+               
                   <div class="mb-3">
                     <label for="email" class="form-label">
                       Seu e-mail
@@ -39,6 +61,7 @@ export default () => {
                       id="email"
                       name="email-username"
                       placeholder="Digite seu e-mail"
+                      onChange={e => setUser({...user, email: e.target.value})}
                       autofocus
                     />
                   </div>
@@ -54,6 +77,7 @@ export default () => {
                         id="password"
                         class="form-control"
                         name="password"
+                        onChange={e => setUser({...user, senha: e.target.value})}
                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                         aria-describedby="password"
                       />
@@ -76,11 +100,11 @@ export default () => {
                     </div>
                   </div>
                   <div class="mb-3">
-                    <button class="btn btn-primary d-grid w-100" type="submit">
+                    <button onClick={handleLogin} class="btn btn-primary d-grid w-100">
                       Entrar
                     </button>
                   </div>
-                </form>
+                
 
                 <p class="text-center">
                   <span>Não tem cadastro?</span>

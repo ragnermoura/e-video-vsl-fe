@@ -10,8 +10,8 @@ export default () => {
     const [video, setVideo] = useState([])
 
     const handleGetVideos = async () => {
-
-        const res =  await videoApi.getVideos(1)
+        const id_user = localStorage.getItem('userId')
+        const res =  await videoApi.getVideos(id_user)
         console.log(res?.data?.response)
         setVideo(res?.data?.response)
     }
@@ -36,7 +36,7 @@ export default () => {
                 <div class="row">
                   
      {
-         video?.map(item => (<a href={`/video/${item?.id_video}`} className="link col-md-3"><img className="col-12" src={item?.thumb}/></a>))
+         video?.map(item => (<a key={item?.id_video} href={`/video/${item?.id_video}`} className="link col-md-3"><img className="col-12" src={item?.thumb}/></a>))
         }
 
         </div>
