@@ -4,23 +4,61 @@ import NavBar from "../../../components/navBar";
 import Footer from "../../../components/footer";
 import { FaTrash } from "react-icons/fa6";
 import { FaLink } from "react-icons/fa6";
+import Instagram from "../../../assets/img/icons/instagram.webp";
+import Youtube from "../../../assets/img/icons/youtube.webp";
+
+import Image1 from "../../../assets/img/img1.webp";
+import Image2 from "../../../assets/img/img2.webp";
+import Image3 from "../../../assets/img/img3.webp";
+
+import Chart from "chart.js/auto";
+import { Bar } from "react-chartjs-2";
 
 export default () => {
+  const data = {
+    labels: [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+    ],
+    datasets: [
+      {
+        label: "Vendas",
+        data: [12, 19, 3, 5, 2, 3, 15],
+        backgroundColor: "rgba(75, 192, 192, 0.2)", // cor de fundo
+        borderColor: "rgba(75, 192, 192, 1)", // cor da borda
+        borderWidth: 1, // largura da borda
+      },
+    ],
+  };
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
+
   return (
     <Container>
       <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
           <MasterMenu />
           <div class="layout-page">
-            <NavBar />
-
             <div class="content-wrapper">
               <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="row">
-                  <div class="col-lg-8 mb-4 order-0">
+                  <div class="col-lg-4 mb-4 order-0">
                     <div class="card">
                       <div class="d-flex align-items-end row">
-                        <div class="col-sm-7">
+                        <div class="col-sm-12">
                           <div class="card-body">
                             <h5 class="card-title text-primary">
                               Bem-vindo Eric! 🎉
@@ -36,19 +74,34 @@ export default () => {
                               target="_blank"
                               class="btn btn-sm btn-outline-primary"
                             >
-                              Temos uma surpresa para você.
+                              Upgrade do plano
                             </a>
                           </div>
                         </div>
                         <div class="col-sm-5 text-center text-sm-left">
-                          <div class="card-body pb-0 px-0 px-md-4">
-                            <img
-                              src="../../src/assets/img/illustrations/man-with-laptop-light.png"
-                              height="140"
-                              alt="View Badge User"
-                              data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                              data-app-light-img="illustrations/man-with-laptop-light.png"
-                            />
+                          <div class="card-body pb-0 px-0 px-md-4"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 order-1">
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-6 mb-4">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between"></div>
+                            <h5 class="card-title text-secondary text-center">
+                              <strong>Indique e Ganhe R$</strong>
+                            </h5>
+                            <h3 class="card-title mb-2">
+                              <button
+                                type="button"
+                                style={{ width: "100%", marginTop: "10%" }}
+                                class="btn btn-primary"
+                              >
+                                Link de afiliados
+                              </button>
+                            </h3>
                           </div>
                         </div>
                       </div>
@@ -59,51 +112,41 @@ export default () => {
                       <div class="col-lg-12 col-md-12 col-6 mb-4">
                         <div class="card">
                           <div class="card-body">
-                            <div class="card-title d-flex align-items-start justify-content-between">
-                              <div class="avatar flex-shrink-0">
-                                <img
-                                  src="../../src/assets/img/icons/unicons/chart-success.png"
-                                  alt="chart success"
-                                  class="rounded"
-                                />
-                              </div>
-                              <div class="dropdown">
-                                <button
-                                  class="btn p-0"
-                                  type="button"
-                                  id="cardOpt3"
-                                  data-bs-toggle="dropdown"
-                                  aria-haspopup="true"
-                                  aria-expanded="false"
-                                >
-                                  <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div
-                                  class="dropdown-menu dropdown-menu-end"
-                                  aria-labelledby="cardOpt3"
-                                >
-                                  <a
-                                    class="dropdown-item"
-                                    href="javascript:void(0);"
-                                  >
-                                    Ver mais
-                                  </a>
-                                  <a
-                                    class="dropdown-item"
-                                    href="javascript:void(0);"
-                                  >
-                                    Delete
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <span class="fw-semibold d-block mb-1">
-                              Seus Videos
+                            <div class="card-title d-flex align-items-start justify-content-between"></div>
+                            <span class="fw-semibold d-block mb-1 text-center">
+                              Acompanhe nossas redes sociais
                             </span>
-                            <h3 class="card-title mb-2">00</h3>
-                            <small class="text-success fw-semibold">
-                              <i class="bx bx-up-arrow-alt"></i> +0
-                            </small>
+
+                            <div
+                              style={{
+                                justifyContent: "center",
+                                marginLeft: "auto",
+                                marginRight: "auto",
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <a
+                                href="https://www.instagram.com/ericsilva_pro/"
+                                target="_blank"
+                              >
+                                <img
+                                  style={{ width: 55 }}
+                                  src={Instagram}
+                                  alt=""
+                                />
+                              </a>
+                              <a
+                                href="https://www.youtube.com/channel/UCE1ICr3RLd439v2bMblaYng"
+                                target="_blank"
+                              >
+                                <img
+                                  style={{ width: 93 }}
+                                  src={Youtube}
+                                  alt=""
+                                />
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -116,276 +159,233 @@ export default () => {
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-6 mb-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="card-title">
-                          <h5 class="text-nowrap mb-2">
-                            Comparativo de Tempo visualizado
-                          </h5>
-                          <span class="badge bg-label-warning rounded-pill"></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6 mb-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="card-title">
-                          <h5 class="text-nowrap mb-2">
-                            Comparativo de Entregas
-                          </h5>
-                          <span class="badge bg-label-warning rounded-pill"></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   <div class="col-4 mb-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                          <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                            <div class="card-title">
-                              <h5 class="text-nowrap mb-2">
-                                Play em vídeos <small>( Total )</small>
-                              </h5>
-                              <span class="badge bg-label-success rounded-pill">
-                                Ano 2023
-                              </span>
-                            </div>
-                            <div class="mt-sm-auto">
-                              <small class="text-success text-nowrap fw-semibold">
-                                <i class="bx bx-chevron-up"></i> 0%
-                              </small>
-                              <h3 class="mb-0">0</h3>
-                            </div>
-                          </div>
-                          <div id="profileReportChart"></div>
-                        </div>
+                    <a href="#" target="_blank">
+                      <div class="card">
+                        <img src={Image1} alt="" srcset="" />
                       </div>
-                    </div>
+                    </a>
                   </div>
 
                   <div class="col-4 mb-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                          <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                            <div class="card-title">
-                              <h5 class="text-nowrap mb-2">Conversões</h5>
-                              <span class="badge bg-label-danger rounded-pill">
-                                Ano 2021
-                              </span>
-                            </div>
-                            <div class="mt-sm-auto">
-                              <small class="text-success text-nowrap fw-semibold">
-                                <i class="bx bx-chevron-up"></i> 0%
-                              </small>
-                              <h3 class="mb-0">0</h3>
-                            </div>
-                          </div>
-                          <div id="profileReportChart"></div>
-                        </div>
+                    <a
+                      href="https://mktdigitalpro.net/pagesbraip/?pv=prox1jwv&af=afiz23d86"
+                      target="_blank"
+                    >
+                      <div class="card">
+                        <img src={Image2} alt="" srcset="" />
                       </div>
-                    </div>
+                    </a>
                   </div>
 
                   <div class="col-4 mb-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                          <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                            <div class="card-title">
-                              <h5 class="text-nowrap mb-2">Perdas</h5>
-                              <span class="badge bg-label-danger rounded-pill">
-                                Ano 2021
-                              </span>
-                            </div>
-                            <div class="mt-sm-auto">
-                              <small class="text-success text-nowrap fw-semibold">
-                                <i class="bx bx-chevron-up"></i> 0%
-                              </small>
-                              <h3 class="mb-0">0</h3>
-                            </div>
-                          </div>
-                          <div id="profileReportChart"></div>
-                        </div>
+                    <a
+                      href="https://plrpremium.net/versao-2023/?pv=pro97mo1&af=afiy167j7"
+                      target="_blank"
+                    >
+                      <div class="card">
+                        <img src={Image3} alt="" srcset="" />
                       </div>
-                    </div>
+                    </a>
                   </div>
 
                   <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
                     <div class="card h-100">
                       <div class="card-header d-flex align-items-center justify-content-between pb-0">
                         <div class="card-title mb-0">
-                          <h5 class="m-0 me-2">Compartivo de Rede Sociais</h5>
-                          <small class="text-muted">0 dados analizados</small>
-                        </div>
-                        <div class="dropdown">
-                          <button
-                            class="btn p-0"
-                            type="button"
-                            id="orederStatistics"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            <i class="bx bx-dots-vertical-rounded"></i>
-                          </button>
-                          <div
-                            class="dropdown-menu dropdown-menu-end"
-                            aria-labelledby="orederStatistics"
-                          >
-                            <a class="dropdown-item" href="javascript:void(0);">
-                              Select All
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0);">
-                              Refresh
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0);">
-                              Share
-                            </a>
-                          </div>
+                          <h5 class="m-0 me-2">Suas indicações</h5>
                         </div>
                       </div>
                       <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                          <div class="d-flex flex-column align-items-center gap-1">
-                            <h2 class="mb-2">0</h2>
-                            <span>Total Orders</span>
+                        <div class="row mt-3">
+                          <div class="col-4 mb-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                                  <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                    <div class="card-title">
+                                      <span
+                                        class="badge bg-label-warning rounded-pill"
+                                        style={{ marginLeft: "-10px" }}
+                                      >
+                                        Mês
+                                      </span>
+                                    </div>
+                                    <div class="mt-sm-auto">
+                                      <h6 class="mb-0">0</h6>
+                                    </div>
+                                  </div>
+                                  <div id="profileReportChart"></div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div id="orderStatisticsChart"></div>
+                          <div class="col-4 mb-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                                  <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                    <div class="card-title">
+                                      <span
+                                        class="badge bg-label-warning rounded-pill"
+                                        style={{ marginLeft: "-15px" }}
+                                      >
+                                        Atual
+                                      </span>
+                                    </div>
+                                    <div class="mt-sm-auto">
+                                      <h6 class="mb-0">0</h6>
+                                    </div>
+                                  </div>
+                                  <div id="profileReportChart"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-4 mb-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                                  <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                    <div class="card-title">
+                                      <span
+                                        class="badge bg-label-warning rounded-pill"
+                                        style={{ marginLeft: "-15px" }}
+                                      >
+                                        Total
+                                      </span>
+                                    </div>
+                                    <div class="mt-sm-auto">
+                                      <h6 class="mb-0">0</h6>
+                                    </div>
+                                  </div>
+                                  <div id="profileReportChart"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <h4 class="card-title m-0 me-2 text-center">
+                            <strong> Ranking de indicações</strong>
+                          </h4>
+
+                          <div class="container-fluid mt-3" style={{marginLeft: '-20px'}}>
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Ranking</th>
+                                  <th scope="col">User</th>
+                                  <th scope="col">Ind.</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>1</td>
+                                  <td>Eric Silva</td>
+                                  <td>7654</td>
+                                </tr>
+                                
+                               
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
-                        <ul class="p-0 m-0">
-                          <li class="d-flex mb-4 pb-1">
-                            <div class="avatar flex-shrink-0 me-3">
-                              <span class="avatar-initial rounded bg-label-info">
-                                <i class="bx bx-facebook"></i>
-                              </span>
-                            </div>
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                              <div class="me-2">
-                                <h6 class="mb-0">Facebook</h6>
-                                <small class="text-muted">Visualizações</small>
-                              </div>
-                              <div class="user-progress">
-                                <small class="fw-semibold">0</small>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="d-flex mb-4 pb-1">
-                            <div class="avatar flex-shrink-0 me-3">
-                              <span class="avatar-initial rounded bg-label-warning">
-                                <i class="bx bx-instagram"></i>
-                              </span>
-                            </div>
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                              <div class="me-2">
-                                <h6 class="mb-0">Instagram</h6>
-                                <small class="text-muted">Visualizações</small>
-                              </div>
-                              <div class="user-progress">
-                                <small class="fw-semibold">0</small>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="d-flex mb-4 pb-1">
-                            <div class="avatar flex-shrink-0 me-3">
-                              <span class="avatar-initial rounded bg-label-danger">
-                                <i class="bx bx-facebook-alt"></i>
-                              </span>
-                            </div>
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                              <div class="me-2">
-                                <h6 class="mb-0">Tiktok</h6>
-                                <small class="text-muted">Visualizações</small>
-                              </div>
-                              <div class="user-progress">
-                                <small class="fw-semibold">0</small>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="d-flex">
-                            <div class="avatar flex-shrink-0 me-3">
-                              <span class="avatar-initial rounded bg-label-secondary">
-                                <i class="bx bx-wordpress"></i>
-                              </span>
-                            </div>
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                              <div class="me-2">
-                                <h6 class="mb-0">Wordpress</h6>
-                                <small class="text-muted">Visualizações</small>
-                              </div>
-                              <div class="user-progress">
-                                <small class="fw-semibold">0</small>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-md-12 col-lg-8 order-2 mb-4">
                     <div class="card h-100">
-                      <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5 class="card-title m-0 me-2">Lista de Vídeos</h5>
-                        <div class="dropdown">
-                          <button
-                            class="btn p-0"
-                            type="button"
-                            id="transactionID"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            <i class="bx bx-dots-vertical-rounded"></i>
-                          </button>
-                          <div
-                            class="dropdown-menu dropdown-menu-end"
-                            aria-labelledby="transactionID"
-                          >
-                            <a class="dropdown-item" href="javascript:void(0);">
-                              Last 28 Days
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0);">
-                              Last Month
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0);">
-                              Last Year
-                            </a>
-                          </div>
-                        </div>
+                      <div class="card-header text-center d-flex align-items-center justify-content-between">
+                        <h4 class="card-title m-0 me-2 text-center">
+                          <strong> Minha Vendas</strong>
+                        </h4>
                       </div>
                       <div class="card-body">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th scope="col">#</th>
-                              <th scope="col">Título</th>
-                              <th scope="col">Tempo</th>
-                              <th scope="col">Thumb</th>
-                              <th scope="col">Ação</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th scope="row"></th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td>
-                               
-
-                                <button class="btn btn-warning btn-sm" style={{marginRight: 4}}>  <FaLink /></button>
-                              
-                                <button class="btn btn-danger btn-sm">
-                                  <FaTrash />
-                                </button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        <div class="row">
+                          <div class="col-3 mb-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                                  <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                    <div class="card-title">
+                                      <h5 class="text-nowrap mb-2">Vendas</h5>
+                                      <span class="badge bg-label-success rounded-pill">
+                                        Hoje
+                                      </span>
+                                    </div>
+                                    <div class="mt-sm-auto">
+                                      <h6 class="mb-0">R$ 0,00</h6>
+                                    </div>
+                                  </div>
+                                  <div id="profileReportChart"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-3 mb-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                                  <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                    <div class="card-title">
+                                      <h5 class="text-nowrap mb-2">Vendas</h5>
+                                      <span class="badge bg-label-warning rounded-pill">
+                                        Ontem
+                                      </span>
+                                    </div>
+                                    <div class="mt-sm-auto">
+                                      <h6 class="mb-0">R$ 0,00</h6>
+                                    </div>
+                                  </div>
+                                  <div id="profileReportChart"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-3 mb-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                                  <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                    <div class="card-title">
+                                      <h5 class="text-nowrap mb-2">Venda</h5>
+                                      <span class="badge bg-label-warning rounded-pill">
+                                        Mês atual
+                                      </span>
+                                    </div>
+                                    <div class="mt-sm-auto">
+                                      <h6 class="mb-0">R$ 0,00</h6>
+                                    </div>
+                                  </div>
+                                  <div id="profileReportChart"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-3 mb-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                                  <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                    <div class="card-title">
+                                      <h5 class="text-nowrap mb-2">Venda</h5>
+                                      <span class="badge bg-label-warning rounded-pill">
+                                        Mês anterior
+                                      </span>
+                                    </div>
+                                    <div class="mt-sm-auto">
+                                      <h6 class="mb-0">R$ 0,00</h6>
+                                    </div>
+                                  </div>
+                                  <div id="profileReportChart"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <Bar data={data} options={options} />
                       </div>
                     </div>
                   </div>

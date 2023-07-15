@@ -8,13 +8,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body{
-    background-color: #D9D9D9;
+    background-color: #FFF;
 
     &::-webkit-scrollbar{
             width: 5px;
         }
         &::-webkit-scrollbar-track {
-    background: #f9f9f9;
+    background: #FFF !important;
     border-radius: 20px;
   }
   

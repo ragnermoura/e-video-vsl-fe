@@ -4,14 +4,19 @@ export const authApi = {
 
 
     login: async (body) => {
-
-        return await api.post(`/login`, body ,{
-            headers: {
-                'Content-Type': "application/json",
-                Accept: "application/json",
+        try {
+            return await api.post(`/login`, body ,{
+                headers: {
+                    'Content-Type': "application/json",
+                    Accept: "application/json",
+                }
             }
+            )
+        } catch (error) {
+            return error?.response?.data
         }
-        )
+
+        
 
     },
     cadastro: async (body) => {

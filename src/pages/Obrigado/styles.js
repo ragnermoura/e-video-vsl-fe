@@ -1,10 +1,7 @@
 import styled  from "styled-components";
 
 export const Container = styled.div`
-height: 100%;
-margin: 10%;
-flex-direction: row;
-gap: 15px;
+background-color: #FFF9;
 
 .createCount{
     color: #999;

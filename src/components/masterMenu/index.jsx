@@ -40,25 +40,21 @@ export default () => {
           </li>
 
           <li class="menu-item">
-            <a href="/area-criacao" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Layouts">Area de criação</div>
+            <a href="#" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-video"></i>
+              <div data-i18n="Basic">Tutorial</div>
             </a>
           </li>
 
           <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Em breve</span>
+            <span class="menu-header-text">Área de criação</span>
           </li>
 
           <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-lock"></i>
-              <div data-i18n="Misc">Teste A-B</div>
+            <a href="/area-criacao" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-edit"></i>
+              <div data-i18n="Layouts">Editor de VSL</div>
             </a>
-          </li>
-
-          <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Gestão</span>
           </li>
           <li class="menu-item">
             <a href="/meus-videos" class="menu-link menu-toggle">
@@ -66,13 +62,39 @@ export default () => {
               <div data-i18n="Account Settings">Meus vídeos</div>
             </a>
           </li>
-
           <li class="menu-item">
-            <a href="/afiliados" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-              <div data-i18n="Misc">Afiliados</div>
+            <a href="/meus-videos" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-chart"></i>
+              <div data-i18n="Account Settings">Métricas</div>
             </a>
           </li>
+
+          <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-lock"></i>
+              <div data-i18n="Misc">Teste A-B |<small class="text-primary"> Em breve</small></div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-lock"></i>
+              <div data-i18n="Misc">Pixel | <small class="text-primary"> Em breve</small></div>
+            </a>
+          </li>
+
+        
+          <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Vitrine de Produtos</span>
+          </li>
+
+          <li class="menu-item">
+            <a href="#" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-store"></i>
+              <div data-i18n="Misc">Produtos Parceiros</div>
+            </a>
+          </li>
+        
+
 
           <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Pessoal</span>

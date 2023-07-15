@@ -9,6 +9,8 @@ import { videoApi } from "../../../services/video";
 
 export default () => {
   const [color, setColor] = useState("#f03939");
+  const [colorBar, setColorBar] = useState("#4539f0");
+  const [colorText, setColorText] = useState("#ffffff");
   const [pathVideo, setPathVideo] = useState('')
   const [pathImage, setPathImage] = useState('')
   const [image, setImage] = useState(null)
@@ -42,7 +44,9 @@ export default () => {
     formData.append('video', video)
     formData.append('id', getId)
     formData.append('cor', color)
+    formData.append('corBarra', colorBar)
     formData.append('text', text)
+    formData.append('corText', colorText)
 
     const response = await videoApi.PostVideo(formData);
 
@@ -65,29 +69,12 @@ export default () => {
         <div class="layout-container">
           <MasterMenu />
           <div class="layout-page">
-            <NavBar />
+           
 
             <div class="content-wrapper">
               <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="row">
-                  <div class="col-lg-12 mb-4 order-0">
-                    <div class="card">
-                      <div class="d-flex align-items-end row">
-                        <div class="col-sm-7">
-                          <div class="card-body">
-                            <h5 class="card-title text-primary">
-                              Bem-vindo Eric! 🎉
-                            </h5>
-                            <p class="mb-4">
-                              Você ainda tem <span class="fw-bold">5</span>{" "}
-                              videos para criar na sua conta. Confira seu plano
-                              e aumente a sua capacidade.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+               
 
                   <div class="col-md-6">
                     <div class="card mb-4">
@@ -160,12 +147,47 @@ export default () => {
                             for="defaultFormControlInput"
                             class="form-label"
                           >
+                            Escolha a cor do texto
+                          </label>
+                          <input
+                            type="color"
+                            value={colorText}
+                            onChange={(e) => setColorText(e?.target?.value)}
+                            class="form-control"
+                            id="defaultFormControlInput"
+                            placeholder="John Doe"
+                            aria-describedby="defaultFormControlHelp"
+                          />
+                        </div>
+
+                        <div className="mt-4">
+                          <label
+                            for="defaultFormControlInput"
+                            class="form-label"
+                          >
                             Escolha a cor dos controles
                           </label>
                           <input
                             type="color"
                             value={color}
                             onChange={(e) => setColor(e?.target?.value)}
+                            class="form-control"
+                            id="defaultFormControlInput"
+                            placeholder="John Doe"
+                            aria-describedby="defaultFormControlHelp"
+                          />
+                        </div>
+                        <div className="mt-4">
+                          <label
+                            for="defaultFormControlInput"
+                            class="form-label"
+                          >
+                            Escolha a cor da barra de progresso
+                          </label>
+                          <input
+                            type="color"
+                            value={colorBar}
+                            onChange={(e) => setColorBar(e?.target?.value)}
                             class="form-control"
                             id="defaultFormControlInput"
                             placeholder="John Doe"
@@ -185,7 +207,7 @@ export default () => {
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <Video caminhoVideo={pathVideo} caminhoThumb={pathImage} text={text} color={color} />
+                    <Video caminhoVideo={pathVideo} colorText={colorText} colorBar={colorBar} caminhoThumb={pathImage} text={text} color={color} />
             
                   </div>
                 </div>

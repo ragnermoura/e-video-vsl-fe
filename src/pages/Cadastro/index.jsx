@@ -22,8 +22,9 @@ export default () => {
     console.log(res?.data)
     if(res?.data?.success){
       console.log('loguei')
+      localStorage.setItem('idUser', res?.data.usuarioCriado.id_user)
 
-      navigate('/login')
+      navigate('/plano')
 
     }
 

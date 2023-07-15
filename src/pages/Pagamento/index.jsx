@@ -1,10 +1,107 @@
 import { Container } from "./styles";
+import Logo from '../../assets/img/logo.png'
 import Boleto from "../../assets/img/icons/boleto.png";
 import { useState } from "react";
+import InputMask from 'react-input-mask'
+import { paymentApi } from "../../services/payment";
+import { useNavigate } from "react-router";
+
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default () => {
   const [formLocal, setFormLocal] = useState("");
+const navigate = useNavigate()
+  const [boletoForm, setBoletoForm] = useState({
+    nome: '',
+    cpf: '',
+  })
+  const [cardForm, setCardForm] = useState({
+    telefone: '',
+    numero: '',
+    documento: '',
+    validade: '',
+    cvv: '',
+    nomeImpresso: ''
+  })
+  const [endereco, setEndereco] = useState({
+    rua: '',
+    estado: '',
+    bairro: '',
+    complemento: '-',
+    numero: '',
+    cep: '',
+    cidade: ''
+  })
 
+  const handleSubcribe = async (type) => {
+
+    const idPlano =  localStorage.getItem('plano_id')
+    const idUser =   localStorage.getItem('idUser')
+    const idPlanoSistema =  localStorage.getItem('plano_id_sistema')
+
+    if(type == 'boleto') {
+      const body = {
+        id_plano: idPlano,
+        metodoPagamento: 'boleto',
+        id_user: idUser,
+        id_plano_sistema: idPlanoSistema,
+        documento: boletoForm?.cpf?.split('.').join('').split('-').join(''),
+      }
+      const req = await paymentApi.createAssinatura(body)
+
+      const data = req.data
+      if(data?.success){
+
+        navigate('/')
+
+      } else {
+        toast.error(res?.mensagem, {
+          theme: 'colored'
+        })
+      }
+    } else {
+      const body = {
+
+        id_plano: idPlano,
+        metodoPagamento: 'credit_card',
+        id_user: idUser,
+        id_plano_sistema: idPlanoSistema,
+        celular: cardForm?.telefone?.split('+')?.join('')?.split(' ')?.join('')?.split('-')?.join('')?.split('(')?.join('')?.split(')')?.join(''),
+        documento: cardForm?.documento?.split('.').join('').split('-').join(''),
+        cartao: {
+          number: cardForm?.numero.split(' ').join(''),
+          cvv: cardForm?.cvv,
+          validade: cardForm?.validade,
+          holder: cardForm?.nomeImpresso,
+          address: {
+            line_1: `${endereco?.numero}, ${endereco?.rua}, ${endereco?.bairro} `,
+            line_2: endereco?.complemento,
+            city: endereco?.cidade,
+            zip_code: endereco?.cep.split('-').join(''),
+            state: endereco?.estado,
+            country: 'BR'
+          }
+        }
+
+      }
+
+      const req = await paymentApi.createAssinatura(body)
+
+      const data = req.data
+
+      if(data?.success){
+
+        navigate('/')
+
+      } else{
+        toast.error(res?.mensagem, {
+          theme: 'colored'
+        })
+      }
+    }
+
+  }
   return (
     <Container>
       <div class="container-xxl ">
@@ -13,97 +110,9 @@ export default () => {
             <div class="card">
               <div class="card-body">
                 <div class="app-brand justify-content-center">
-                  <a href="index.html" class="app-brand-link gap-2">
+                <a href="#" class="app-brand-link gap-2">
                     <span class="app-brand-logo demo">
-                      <svg
-                        width="25"
-                        viewBox="0 0 25 42"
-                        version="1.1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                      >
-                        <defs>
-                          <path
-                            d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
-                            id="path-1"
-                          ></path>
-                          <path
-                            d="M5.47320593,6.00457225 C4.05321814,8.216144 4.36334763,10.0722806 6.40359441,11.5729822 C8.61520715,12.571656 10.0999176,13.2171421 10.8577257,13.5094407 L15.5088241,14.433041 L18.6192054,7.984237 C15.5364148,3.11535317 13.9273018,0.573395879 13.7918663,0.358365126 C13.5790555,0.511491653 10.8061687,2.3935607 5.47320593,6.00457225 Z"
-                            id="path-3"
-                          ></path>
-                          <path
-                            d="M7.50063644,21.2294429 L12.3234468,23.3159332 C14.1688022,24.7579751 14.397098,26.4880487 13.008334,28.506154 C11.6195701,30.5242593 10.3099883,31.790241 9.07958868,32.3040991 C5.78142938,33.4346997 4.13234973,34 4.13234973,34 C4.13234973,34 2.75489982,33.0538207 2.37032616e-14,31.1614621 C-0.55822714,27.8186216 -0.55822714,26.0572515 -4.05231404e-15,25.8773518 C0.83734071,25.6075023 2.77988457,22.8248993 3.3049379,22.52991 C3.65497346,22.3332504 5.05353963,21.8997614 7.50063644,21.2294429 Z"
-                            id="path-4"
-                          ></path>
-                          <path
-                            d="M20.6,7.13333333 L25.6,13.8 C26.2627417,14.6836556 26.0836556,15.9372583 25.2,16.6 C24.8538077,16.8596443 24.4327404,17 24,17 L14,17 C12.8954305,17 12,16.1045695 12,15 C12,14.5672596 12.1403557,14.1461923 12.4,13.8 L17.4,7.13333333 C18.0627417,6.24967773 19.3163444,6.07059163 20.2,6.73333333 C20.3516113,6.84704183 20.4862915,6.981722 20.6,7.13333333 Z"
-                            id="path-5"
-                          ></path>
-                        </defs>
-                        <g
-                          id="g-app-brand"
-                          stroke="none"
-                          stroke-width="1"
-                          fill="none"
-                          fill-rule="evenodd"
-                        >
-                          <g
-                            id="Brand-Logo"
-                            transform="translate(-27.000000, -15.000000)"
-                          >
-                            <g
-                              id="Icon"
-                              transform="translate(27.000000, 15.000000)"
-                            >
-                              <g
-                                id="Mask"
-                                transform="translate(0.000000, 8.000000)"
-                              >
-                                <mask id="mask-2" fill="white">
-                                  <use xlink:href="#path-1"></use>
-                                </mask>
-                                <use fill="#696cff" xlink:href="#path-1"></use>
-                                <g id="Path-3" mask="url(#mask-2)">
-                                  <use
-                                    fill="#696cff"
-                                    xlink:href="#path-3"
-                                  ></use>
-                                  <use
-                                    fill-opacity="0.2"
-                                    fill="#FFFFFF"
-                                    xlink:href="#path-3"
-                                  ></use>
-                                </g>
-                                <g id="Path-4" mask="url(#mask-2)">
-                                  <use
-                                    fill="#696cff"
-                                    xlink:href="#path-4"
-                                  ></use>
-                                  <use
-                                    fill-opacity="0.2"
-                                    fill="#FFFFFF"
-                                    xlink:href="#path-4"
-                                  ></use>
-                                </g>
-                              </g>
-                              <g
-                                id="Triangle"
-                                transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) "
-                              >
-                                <use fill="#696cff" xlink:href="#path-5"></use>
-                                <use
-                                  fill-opacity="0.2"
-                                  fill="#FFFFFF"
-                                  xlink:href="#path-5"
-                                ></use>
-                              </g>
-                            </g>
-                          </g>
-                        </g>
-                      </svg>
-                    </span>
-                    <span class="app-brand-text demo text-body fw-bolder">
-                      Sneat
+                      <img src={Logo} alt="" srcset="" className="img-fluid" style={{width: 200}} />
                     </span>
                   </a>
                 </div>
@@ -153,14 +162,10 @@ export default () => {
                 </div>
 
                 {formLocal == "boleto" && (
-                  <div>
-                    <form
-                      id="boleto"
+                  <div id="boleto"
                 
-                      class="mb-3"
-                      action="index.html"
-                      method="POST"
-                    >
+                  class="mb-3">
+                    
                       <div class="mb-3">
                         <label for="email" class="form-label">
                           Seu nome
@@ -171,9 +176,11 @@ export default () => {
                           id="nome"
                           name="nome"
                           placeholder="Digite seu nome"
+                          onChange={e => setBoletoForm({...boletoForm, nome: e.target.value})}
                           autofocus
                         />
                       </div>
+                    
                       <div class="mb-3 form-password-toggle">
                         <div class="d-flex justify-content-between">
                           <label class="form-label" for="password">
@@ -181,36 +188,40 @@ export default () => {
                           </label>
                         </div>
                         <div class="input-group input-group-merge">
-                          <input
-                            type="text"
-                            id="cpf"
-                            class="form-control"
-                            name="cpf"
-                            placeholder="000.000.000-00"
-                            aria-describedby="password"
-                          />
+                          <InputMask
+                          mask={'999.999.999-99'}
+                          onChange={e => setBoletoForm({...boletoForm, cpf: e.target.value})}
+                          >
+                          { inputProps => <input id="cpf"
+                          class="form-control"
+                          {...inputProps}
+                          name="cpf"
+                          placeholder="000.000.000-00"
+                          aria-describedby="cpf" 
+                          type="text"/>}
+                            
+                            </InputMask>
                         </div>
                       </div>
 
                       <div class="mb-3">
                         <button
+                        onClick={() => handleSubcribe('boleto')}
                           class="btn btn-primary d-grid w-100"
-                          type="submit"
+                         
                         >
                           Gerar boleto
                         </button>
                       </div>
-                    </form>
+                    
                   </div>
                 )}
 
                 {formLocal == "cartao" && (
-                  <form
-                    id="card"
-                    class="mb-3"
-                    action="index.html"
-                    method="POST"
-                  >
+                  <div
+                  id="card"
+                    class="mb-3">
+                  
                     <div class="mb-3 form-password-toggle">
                       <div class="d-flex justify-content-between">
                         <label class="form-label" for="password">
@@ -218,14 +229,22 @@ export default () => {
                         </label>
                       </div>
                       <div class="input-group input-group-merge">
+                          <InputMask
+                          mask={'+55 (99) 99999-9999'}
+                          onChange={e => setCardForm({...cardForm, telefone: e.target.value})}
+                          >    
+                          { inputProps =>                        
                         <input
-                          type="text"
-                          id="telefone"
-                          class="form-control"
-                          name="card"
-                          placeholder="(00)0000-0000"
-                          aria-describedby="card"
+                        {...inputProps}
+                        type="text"
+                        id="telefone"
+                        class="form-control"
+                        name="card"
+                        placeholder="(00)0000-0000"
+                        aria-describedby="card"
                         />
+                      }
+                          </InputMask>
                       </div>
                     </div>
 
@@ -236,16 +255,70 @@ export default () => {
                         </label>
                       </div>
                       <div class="input-group input-group-merge">
+                      <InputMask
+                          mask={'9999 9999 9999 9999'}
+                          onChange={e => setCardForm({...cardForm, numero: e.target.value})}
+                          >    
+                          { inputProps =>     
                         <input
                           type="text"
+                          {
+                            ...inputProps
+                          }
                           id="card"
                           class="form-control"
                           name="card"
                           placeholder="0000 0000 0000 0000"
                           aria-describedby="card"
-                        />
+                        /> }
+                        </InputMask>
                       </div>
                     </div>
+
+                    <div class="mb-3 form-password-toggle">
+                      <div class="d-flex justify-content-between">
+                        <label class="form-label" for="password">
+                          Nome impresso no Cartão
+                        </label>
+                      </div>
+                      <div class="input-group input-group-merge">
+                     
+                           
+                        <input
+                          onChange={e => setCardForm({...cardForm, nomeImpresso: e.target.value})}
+                          id="card"
+                          class="form-control"
+                          name="card"
+                          placeholder="0000 0000 0000 0000"
+                          aria-describedby="card"
+                        /> 
+                      </div>
+                    </div>
+
+                    
+                    <div class="mb-3 form-password-toggle">
+                        <div class="d-flex justify-content-between">
+                          <label class="form-label" for="password">
+                            CPF
+                          </label>
+                        </div>
+                        <div class="input-group input-group-merge">
+                          <InputMask
+                          mask={'999.999.999-99'}
+                          onChange={e => setCardForm({...cardForm, documento: e.target.value})}
+                          >
+                          { inputProps => <input id="cpf"
+                          class="form-control"
+                          {...inputProps}
+                          name="cpf"
+                          placeholder="000.000.000-00"
+                          aria-describedby="cpf" 
+                          type="text"/>}
+                            
+                            </InputMask>
+                        </div>
+                      </div>
+
                     <div class="row">
                       <div class="col-md-8">
                         <div class="mb-3 form-password-toggle">
@@ -255,14 +328,21 @@ export default () => {
                             </label>
                           </div>
                           <div class="input-group input-group-merge">
+                          <InputMask
+                          mask={'99/9999'}
+                          onChange={e => setCardForm({...cardForm, validade: e.target.value})}
+                          >    
+                          { inputProps =>   
                             <input
+                            {...inputProps}
                               type="text"
                               id="card"
                               class="form-control"
                               name="card"
                               placeholder="00/0000"
                               aria-describedby="card"
-                            />
+                            /> }
+                            </InputMask>
                           </div>
                         </div>
                       </div>
@@ -274,14 +354,164 @@ export default () => {
                             </label>
                           </div>
                           <div class="input-group input-group-merge">
+                          <InputMask
+                          mask={'999'}
+                          onChange={e => setCardForm({...cardForm, cvv: e.target.value})}
+                          >    
+                          { inputProps =>   
                             <input
+                            {...inputProps}
                               type="text"
                               id="card"
                               class="form-control"
                               name="card"
                               placeholder="000"
                               aria-describedby="card"
-                            />
+                            /> }
+                            </InputMask>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+              
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="mb-3 form-password-toggle">
+                          <div class="d-flex justify-content-between">
+                            <label class="form-label" for="password">
+                              Rua
+                            </label>
+                          </div>
+                          <div class="input-group input-group-merge">
+                          
+                            <input
+                          
+                              type="text"
+                              id="card"
+                              class="form-control"
+                              name="card"
+                              placeholder="Rua exemplo"
+                              aria-describedby="card"
+                              onChange={e => setEndereco({...endereco, rua: e.target.value})}
+                            /> 
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="mb-3 form-password-toggle">
+                          <div class="d-flex justify-content-between">
+                            <label class="form-label" for="password">
+                              Numero
+                            </label>
+                          </div>
+                          <div class="input-group input-group-merge">
+                            <input
+                              type="text"
+                              id="card"
+                              class="form-control"
+                              name="card"
+                              placeholder="146"
+                              aria-describedby="card"
+                              onChange={e => setEndereco({...endereco, numero: e.target.value})}
+                            /> 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+              
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="mb-3 form-password-toggle">
+                          <div class="d-flex justify-content-between">
+                            <label class="form-label" for="password">
+                              Bairro
+                            </label>
+                          </div>
+                          <div class="input-group input-group-merge">
+                          
+                            <input
+                          
+                              type="text"
+                              id="card"
+                              class="form-control"
+                              name="card"
+                              placeholder="Bairro exemplo"
+                              aria-describedby="card"
+                              onChange={e => setEndereco({...endereco, bairro: e.target.value})}
+                            /> 
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-5">
+                        <div class="mb-3 form-password-toggle">
+                          <div class="d-flex justify-content-between">
+                            <label class="form-label" for="password">
+                              cep
+                            </label>
+                          </div>
+                          <div class="input-group input-group-merge">
+                          <InputMask
+                          mask={'99999-999'}
+                          onChange={e => setEndereco({...endereco, cep: e.target.value})}
+                          >    
+                          { inputProps =>   
+                            <input
+                            {...inputProps}
+                              type="text"
+                              id="card"
+                              class="form-control"
+                              name="card"
+                              placeholder="99999-999"
+                              aria-describedby="card"
+                            /> }
+                            </InputMask>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="mb-3 form-password-toggle">
+                          <div class="d-flex justify-content-between">
+                            <label class="form-label" for="password">
+                              Cidade
+                            </label>
+                          </div>
+                          <div class="input-group input-group-merge">
+                          
+                            <input
+                          
+                              type="text"
+                              id="card"
+                              class="form-control"
+                              name="card"
+                              placeholder="Rua exemplo"
+                              aria-describedby="card"
+                              onChange={e => setEndereco({...endereco, cidade: e.target.value})}
+                            /> 
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="mb-3 form-password-toggle">
+                          <div class="d-flex justify-content-between">
+                            <label class="form-label" for="password">
+                              Cod. Estado
+                            </label>
+                          </div>
+                          <div class="input-group input-group-merge">
+                            <input
+                              type="text"
+                              id="card"
+                              class="form-control"
+                              name="card"
+                              placeholder="SP"
+                              aria-describedby="card"
+                              onChange={e => setEndereco({...endereco, estado: e.target.value})}
+                            /> 
                           </div>
                         </div>
                       </div>
@@ -290,18 +520,19 @@ export default () => {
                     <div class="mb-3">
                       <button
                         class="btn btn-primary d-grid w-100"
-                        type="submit"
+                       onClick={() => handleSubcribe('card')}
                       >
                         Pagar
                       </button>
                     </div>
-                  </form>
+                    </div>
                 )}
               </div>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </Container>
   );
 };
