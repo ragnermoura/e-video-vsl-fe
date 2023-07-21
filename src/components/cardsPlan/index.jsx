@@ -4,13 +4,13 @@ import {FaCheck} from 'react-icons/fa6'
 export default ({ titulo, preco, descricao }) => {
   return (
     <Container>
-      <div class="container-xxl">
-        <div class="authentication-basic container-p-y">
-          <div class="authentication-inner">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="mb-2"> {titulo}</h4>
-                <p class="mb-4">{preco}</p>
+      <div className="container-xxl">
+        <div className="authentication-basic container-p-y">
+          <div className="authentication-inner">
+            <div className="card">
+              <div className="card-body">
+                <h4 className="mb-2"> {titulo}</h4>
+                <p className="mb-4">{preco}</p>
                 <h6><strong>Descrição do plano</strong> </h6>
                 <ul>
                   {descricao.map((item) => (
@@ -18,7 +18,7 @@ export default ({ titulo, preco, descricao }) => {
                   ))}
                 </ul>
 
-                <button class="btn btn-primary d-grid w-100" type="submit">
+                <button className="btn btn-primary d-grid w-100" type="submit">
                   Selecionar
                 </button>
               </div>

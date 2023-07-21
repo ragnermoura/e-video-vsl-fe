@@ -17,10 +17,10 @@ export const authApi = {
         }
 
         
-
     },
-    cadastro: async (body) => {
 
+    cadastro: async (body) => {
+        try {
         return await api.post(`/usuario/cadastro`, body ,{
             headers: {
                 'Content-Type': "application/json",
@@ -28,6 +28,9 @@ export const authApi = {
             }
         }
         )
+    } catch (error) {
+        return error?.response?.data
+    }
 
     }
 

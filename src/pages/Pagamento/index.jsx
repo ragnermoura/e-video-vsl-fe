@@ -104,32 +104,32 @@ const navigate = useNavigate()
   }
   return (
     <Container>
-      <div class="container-xxl ">
-        <div class="authentication-wrapper authentication-basic container-p-y">
-          <div class="authentication-inner">
-            <div class="card">
-              <div class="card-body">
-                <div class="app-brand justify-content-center">
-                <a href="#" class="app-brand-link gap-2">
-                    <span class="app-brand-logo demo">
+      <div className="container-xxl ">
+        <div className="authentication-wrapper authentication-basic container-p-y">
+          <div className="authentication-inner">
+            <div className="card">
+              <div className="card-body">
+                <div className="app-brand justify-content-center">
+                <a href="#" className="app-brand-link gap-2">
+                    <span className="app-brand-logo demo">
                       <img src={Logo} alt="" srcset="" className="img-fluid" style={{width: 200}} />
                     </span>
                   </a>
                 </div>
 
-                <h4 class="mb-2">
+                <h4 className="mb-2">
                   Seu plano é o <strong>Básico</strong> 👋
                 </h4>
-                <p class="mb-4">por favor, escolha o metodo de pagamento.</p>
+                <p className="mb-4">por favor, escolha o metodo de pagamento.</p>
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="mb-3">
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="mb-3">
                       <button
-                        class="btn  btnPagamento d-grid w-100"
+                        className="btn  btnPagamento d-grid w-100"
                         onClick={() => setFormLocal("boleto")}
                       >
-                        <div class="areaPay">
+                        <div className="areaPay">
                           <img
                             width="34"
                             height="34"
@@ -141,13 +141,13 @@ const navigate = useNavigate()
                       </button>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="mb-3">
+                  <div className="col-md-6">
+                    <div className="mb-3">
                       <button
-                        class="btn  btnPagamento d-grid w-100"
+                        className="btn  btnPagamento d-grid w-100"
                         onClick={() => setFormLocal("cartao")}
                       >
-                        <div class="areaPay">
+                        <div className="areaPay">
                           <img
                             width="34"
                             height="34"
@@ -164,15 +164,15 @@ const navigate = useNavigate()
                 {formLocal == "boleto" && (
                   <div id="boleto"
                 
-                  class="mb-3">
+                  className="mb-3">
                     
-                      <div class="mb-3">
-                        <label for="email" class="form-label">
+                      <div className="mb-3">
+                        <label for="email" className="form-label">
                           Seu nome
                         </label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           id="nome"
                           name="nome"
                           placeholder="Digite seu nome"
@@ -181,19 +181,19 @@ const navigate = useNavigate()
                         />
                       </div>
                     
-                      <div class="mb-3 form-password-toggle">
-                        <div class="d-flex justify-content-between">
-                          <label class="form-label" for="password">
+                      <div className="mb-3 form-password-toggle">
+                        <div className="d-flex justify-content-between">
+                          <label className="form-label" for="password">
                             CPF
                           </label>
                         </div>
-                        <div class="input-group input-group-merge">
+                        <div className="input-group input-group-merge">
                           <InputMask
                           mask={'999.999.999-99'}
                           onChange={e => setBoletoForm({...boletoForm, cpf: e.target.value})}
                           >
                           { inputProps => <input id="cpf"
-                          class="form-control"
+                          className="form-control"
                           {...inputProps}
                           name="cpf"
                           placeholder="000.000.000-00"
@@ -204,10 +204,10 @@ const navigate = useNavigate()
                         </div>
                       </div>
 
-                      <div class="mb-3">
+                      <div className="mb-3">
                         <button
                         onClick={() => handleSubcribe('boleto')}
-                          class="btn btn-primary d-grid w-100"
+                          className="btn btn-primary d-grid w-100"
                          
                         >
                           Gerar boleto
@@ -220,15 +220,15 @@ const navigate = useNavigate()
                 {formLocal == "cartao" && (
                   <div
                   id="card"
-                    class="mb-3">
+                    className="mb-3">
                   
-                    <div class="mb-3 form-password-toggle">
-                      <div class="d-flex justify-content-between">
-                        <label class="form-label" for="password">
+                    <div className="mb-3 form-password-toggle">
+                      <div className="d-flex justify-content-between">
+                        <label className="form-label" for="password">
                           Qual seu telefone?
                         </label>
                       </div>
-                      <div class="input-group input-group-merge">
+                      <div className="input-group input-group-merge">
                           <InputMask
                           mask={'+55 (99) 99999-9999'}
                           onChange={e => setCardForm({...cardForm, telefone: e.target.value})}
@@ -238,7 +238,7 @@ const navigate = useNavigate()
                         {...inputProps}
                         type="text"
                         id="telefone"
-                        class="form-control"
+                        className="form-control"
                         name="card"
                         placeholder="(00)0000-0000"
                         aria-describedby="card"
@@ -248,13 +248,13 @@ const navigate = useNavigate()
                       </div>
                     </div>
 
-                    <div class="mb-3 form-password-toggle">
-                      <div class="d-flex justify-content-between">
-                        <label class="form-label" for="password">
+                    <div className="mb-3 form-password-toggle">
+                      <div className="d-flex justify-content-between">
+                        <label className="form-label" for="password">
                           Numero do Cartão
                         </label>
                       </div>
-                      <div class="input-group input-group-merge">
+                      <div className="input-group input-group-merge">
                       <InputMask
                           mask={'9999 9999 9999 9999'}
                           onChange={e => setCardForm({...cardForm, numero: e.target.value})}
@@ -266,7 +266,7 @@ const navigate = useNavigate()
                             ...inputProps
                           }
                           id="card"
-                          class="form-control"
+                          className="form-control"
                           name="card"
                           placeholder="0000 0000 0000 0000"
                           aria-describedby="card"
@@ -275,19 +275,19 @@ const navigate = useNavigate()
                       </div>
                     </div>
 
-                    <div class="mb-3 form-password-toggle">
-                      <div class="d-flex justify-content-between">
-                        <label class="form-label" for="password">
+                    <div className="mb-3 form-password-toggle">
+                      <div className="d-flex justify-content-between">
+                        <label className="form-label" for="password">
                           Nome impresso no Cartão
                         </label>
                       </div>
-                      <div class="input-group input-group-merge">
+                      <div className="input-group input-group-merge">
                      
                            
                         <input
                           onChange={e => setCardForm({...cardForm, nomeImpresso: e.target.value})}
                           id="card"
-                          class="form-control"
+                          className="form-control"
                           name="card"
                           placeholder="0000 0000 0000 0000"
                           aria-describedby="card"
@@ -296,19 +296,19 @@ const navigate = useNavigate()
                     </div>
 
                     
-                    <div class="mb-3 form-password-toggle">
-                        <div class="d-flex justify-content-between">
-                          <label class="form-label" for="password">
+                    <div className="mb-3 form-password-toggle">
+                        <div className="d-flex justify-content-between">
+                          <label className="form-label" for="password">
                             CPF
                           </label>
                         </div>
-                        <div class="input-group input-group-merge">
+                        <div className="input-group input-group-merge">
                           <InputMask
                           mask={'999.999.999-99'}
                           onChange={e => setCardForm({...cardForm, documento: e.target.value})}
                           >
                           { inputProps => <input id="cpf"
-                          class="form-control"
+                          className="form-control"
                           {...inputProps}
                           name="cpf"
                           placeholder="000.000.000-00"
@@ -319,15 +319,15 @@ const navigate = useNavigate()
                         </div>
                       </div>
 
-                    <div class="row">
-                      <div class="col-md-8">
-                        <div class="mb-3 form-password-toggle">
-                          <div class="d-flex justify-content-between">
-                            <label class="form-label" for="password">
+                    <div className="row">
+                      <div className="col-md-8">
+                        <div className="mb-3 form-password-toggle">
+                          <div className="d-flex justify-content-between">
+                            <label className="form-label" for="password">
                               Validade
                             </label>
                           </div>
-                          <div class="input-group input-group-merge">
+                          <div className="input-group input-group-merge">
                           <InputMask
                           mask={'99/9999'}
                           onChange={e => setCardForm({...cardForm, validade: e.target.value})}
@@ -337,7 +337,7 @@ const navigate = useNavigate()
                             {...inputProps}
                               type="text"
                               id="card"
-                              class="form-control"
+                              className="form-control"
                               name="card"
                               placeholder="00/0000"
                               aria-describedby="card"
@@ -346,14 +346,14 @@ const navigate = useNavigate()
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="mb-3 form-password-toggle">
-                          <div class="d-flex justify-content-between">
-                            <label class="form-label" for="password">
+                      <div className="col-md-4">
+                        <div className="mb-3 form-password-toggle">
+                          <div className="d-flex justify-content-between">
+                            <label className="form-label" for="password">
                               CVV
                             </label>
                           </div>
-                          <div class="input-group input-group-merge">
+                          <div className="input-group input-group-merge">
                           <InputMask
                           mask={'999'}
                           onChange={e => setCardForm({...cardForm, cvv: e.target.value})}
@@ -363,7 +363,7 @@ const navigate = useNavigate()
                             {...inputProps}
                               type="text"
                               id="card"
-                              class="form-control"
+                              className="form-control"
                               name="card"
                               placeholder="000"
                               aria-describedby="card"
@@ -375,21 +375,21 @@ const navigate = useNavigate()
                     </div>
 
               
-                    <div class="row">
-                      <div class="col-md-8">
-                        <div class="mb-3 form-password-toggle">
-                          <div class="d-flex justify-content-between">
-                            <label class="form-label" for="password">
+                    <div className="row">
+                      <div className="col-md-8">
+                        <div className="mb-3 form-password-toggle">
+                          <div className="d-flex justify-content-between">
+                            <label className="form-label" for="password">
                               Rua
                             </label>
                           </div>
-                          <div class="input-group input-group-merge">
+                          <div className="input-group input-group-merge">
                           
                             <input
                           
                               type="text"
                               id="card"
-                              class="form-control"
+                              className="form-control"
                               name="card"
                               placeholder="Rua exemplo"
                               aria-describedby="card"
@@ -398,18 +398,18 @@ const navigate = useNavigate()
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="mb-3 form-password-toggle">
-                          <div class="d-flex justify-content-between">
-                            <label class="form-label" for="password">
+                      <div className="col-md-4">
+                        <div className="mb-3 form-password-toggle">
+                          <div className="d-flex justify-content-between">
+                            <label className="form-label" for="password">
                               Numero
                             </label>
                           </div>
-                          <div class="input-group input-group-merge">
+                          <div className="input-group input-group-merge">
                             <input
                               type="text"
                               id="card"
-                              class="form-control"
+                              className="form-control"
                               name="card"
                               placeholder="146"
                               aria-describedby="card"
@@ -421,21 +421,21 @@ const navigate = useNavigate()
                     </div>
 
               
-                    <div class="row">
-                      <div class="col-md-7">
-                        <div class="mb-3 form-password-toggle">
-                          <div class="d-flex justify-content-between">
-                            <label class="form-label" for="password">
+                    <div className="row">
+                      <div className="col-md-7">
+                        <div className="mb-3 form-password-toggle">
+                          <div className="d-flex justify-content-between">
+                            <label className="form-label" for="password">
                               Bairro
                             </label>
                           </div>
-                          <div class="input-group input-group-merge">
+                          <div className="input-group input-group-merge">
                           
                             <input
                           
                               type="text"
                               id="card"
-                              class="form-control"
+                              className="form-control"
                               name="card"
                               placeholder="Bairro exemplo"
                               aria-describedby="card"
@@ -444,14 +444,14 @@ const navigate = useNavigate()
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-5">
-                        <div class="mb-3 form-password-toggle">
-                          <div class="d-flex justify-content-between">
-                            <label class="form-label" for="password">
+                      <div className="col-md-5">
+                        <div className="mb-3 form-password-toggle">
+                          <div className="d-flex justify-content-between">
+                            <label className="form-label" for="password">
                               cep
                             </label>
                           </div>
-                          <div class="input-group input-group-merge">
+                          <div className="input-group input-group-merge">
                           <InputMask
                           mask={'99999-999'}
                           onChange={e => setEndereco({...endereco, cep: e.target.value})}
@@ -461,7 +461,7 @@ const navigate = useNavigate()
                             {...inputProps}
                               type="text"
                               id="card"
-                              class="form-control"
+                              className="form-control"
                               name="card"
                               placeholder="99999-999"
                               aria-describedby="card"
@@ -472,21 +472,21 @@ const navigate = useNavigate()
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-md-8">
-                        <div class="mb-3 form-password-toggle">
-                          <div class="d-flex justify-content-between">
-                            <label class="form-label" for="password">
+                    <div className="row">
+                      <div className="col-md-8">
+                        <div className="mb-3 form-password-toggle">
+                          <div className="d-flex justify-content-between">
+                            <label className="form-label" for="password">
                               Cidade
                             </label>
                           </div>
-                          <div class="input-group input-group-merge">
+                          <div className="input-group input-group-merge">
                           
                             <input
                           
                               type="text"
                               id="card"
-                              class="form-control"
+                              className="form-control"
                               name="card"
                               placeholder="Rua exemplo"
                               aria-describedby="card"
@@ -495,18 +495,18 @@ const navigate = useNavigate()
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="mb-3 form-password-toggle">
-                          <div class="d-flex justify-content-between">
-                            <label class="form-label" for="password">
+                      <div className="col-md-4">
+                        <div className="mb-3 form-password-toggle">
+                          <div className="d-flex justify-content-between">
+                            <label className="form-label" for="password">
                               Cod. Estado
                             </label>
                           </div>
-                          <div class="input-group input-group-merge">
+                          <div className="input-group input-group-merge">
                             <input
                               type="text"
                               id="card"
-                              class="form-control"
+                              className="form-control"
                               name="card"
                               placeholder="SP"
                               aria-describedby="card"
@@ -517,9 +517,9 @@ const navigate = useNavigate()
                       </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div className="mb-3">
                       <button
-                        class="btn btn-primary d-grid w-100"
+                        className="btn btn-primary d-grid w-100"
                        onClick={() => handleSubcribe('card')}
                       >
                         Pagar

@@ -43,7 +43,7 @@ export const Progress = styled.progress`
   border: none;
   overflow: hidden;
   position: absolute;
-  margin-top: -2.3% !important;
+  margin-top: -10px !important;
 
   &::-webkit-progress-bar {
     background-color: #00000000;

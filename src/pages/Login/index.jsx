@@ -19,7 +19,7 @@ export default () => {
       console.log("loguei");
       localStorage.setItem("userId", res?.data?.user_id);
       localStorage.setItem("token", res?.data?.token);
-
+      localStorage.setItem('nome_usuario', res?.data?.name)
       navigate("/dashboard-main");
     } else {
       toast.error(res?.mensagem, {
@@ -30,14 +30,14 @@ export default () => {
 
   return (
     <Container>
-      <div class="container-xxl">
-        <div class="authentication-wrapper authentication-basic container-p-y">
-          <div class="authentication-inner">
-            <div class="card">
-              <div class="card-body">
-                <div class="app-brand justify-content-center">
-                  <a href="#" class="app-brand-link gap-2">
-                    <span class="app-brand-logo demo">
+      <div className="container-xxl">
+        <div className="authentication-wrapper authentication-basic container-p-y">
+          <div className="authentication-inner">
+            <div className="card">
+              <div className="card-body">
+                <div className="app-brand justify-content-center">
+                  <a href="#" className="app-brand-link gap-2">
+                    <span className="app-brand-logo demo">
                       <img
                         src={Logo}
                         alt=""
@@ -49,27 +49,27 @@ export default () => {
                   </a>
                 </div>
 
-                <h4 class="mb-2">Bem-vindo ao e-Video! 👋</h4>
-                <p class="mb-4">
+                <h4 className="mb-2">Bem-vindo ao e-Video! 👋</h4>
+                <p className="mb-4">
                   Por favor, insira seus dados para entrar na plataforma.
                 </p>
 
-                <div class="alert alert-warning" hidden role="alert">
+                <div className="alert alert-warning" hidden role="alert">
                  Ainda não confirmamos seu pagamento :/
                 </div>
-                <div class="alert alert-danger" hidden role="alert">
+                <div className="alert alert-danger" hidden role="alert">
                  Oops... O e-mail e/ou senha estão incorretos, tente novamente :(
                 </div>
-                <div class="alert alert-success" hidden role="alert">
+                <div className="alert alert-success" hidden role="alert">
                 Você saiu... Volte logo!
                 </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">
+                <div className="mb-3">
+                  <label for="email" className="form-label">
                     Seu e-mail
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="email"
                     name="email-username"
                     placeholder="Digite seu e-mail"
@@ -79,17 +79,17 @@ export default () => {
                     autofocus
                   />
                 </div>
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">
+                <div className="mb-3 form-password-toggle">
+                  <div className="d-flex justify-content-between">
+                    <label className="form-label" for="password">
                       Senha
                     </label>
                   </div>
-                  <div class="input-group input-group-merge">
+                  <div className="input-group input-group-merge">
                     <input
                       type="password"
                       id="password"
-                      class="form-control"
+                      className="form-control"
                       name="password"
                       onChange={(e) =>
                         setUser({ ...user, senha: e.target.value })
@@ -97,34 +97,34 @@ export default () => {
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
                     />
-                    <span class="input-group-text cursor-pointer">
-                      <i class="bx bx-hide"></i>
+                    <span className="input-group-text cursor-pointer">
+                      <i className="bx bx-hide"></i>
                     </span>
                   </div>
                 </div>
-                <div class="mb-3">
-                  <div class="form-check">
+                <div className="mb-3">
+                  <div className="form-check">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       id="remember-me"
                     />
-                    <label class="form-check-label" for="remember-me">
+                    <label className="form-check-label" for="remember-me">
                       {" "}
                       Lembre-me{" "}
                     </label>
                   </div>
                 </div>
-                <div class="mb-3">
+                <div className="mb-3">
                   <button
                     onClick={handleLogin}
-                    class="btn btn-primary d-grid w-100"
+                    className="btn btn-primary d-grid w-100"
                   >
                     Entrar
                   </button>
                 </div>
 
-                <p class="text-center">
+                <p className="text-center">
                   <span>Não tem cadastro?</span>
                   <a href="/cadastro">
                     <span className="createCount">Crie sua conta aqui</span>

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Container, Play, Progress, Thumb, Video } from "./styles";
 import { FaPlay, FaVolumeMute } from "react-icons/fa";
 import Sound from "../../assets/img/sound.svg";
-export default ({ color, text, caminhoVideo, caminhoThumb, colorBar, colorText }) => {
+export default ({ color, textInferior, textSuperior, caminhoVideo, caminhoThumb, colorBar, colorText }) => {
   const [currentProgress, setCurrentProgress] = useState(0);
   const videoRef = useRef(null);
   const video = videoRef.current;
@@ -15,7 +15,7 @@ export default ({ color, text, caminhoVideo, caminhoThumb, colorBar, colorText }
   const handleUpdateProgress = () => {
     if(video?.currentTime < 20){
       
-      let progress = (video?.currentTime / video?.duration) * 700;
+      let progress = (video?.currentTime / video?.duration) * 300;
       setCurrentProgress(progress?.toFixed(1));
       setAtual(progress)
     } else {
@@ -34,11 +34,11 @@ export default ({ color, text, caminhoVideo, caminhoThumb, colorBar, colorText }
 
     if (video.paused) {
       video.play();
-      video.hidden = false
+      caminhoThumb !== ""?  video.hidden = false : video.hidden = false
       setPlayed(true);
     } else {
       video.pause();
-      video.hidden = true
+      caminhoThumb !== ""?  video.hidden = true : video.hidden = false
       setPlayed(false);
     }
   };
@@ -55,7 +55,8 @@ export default ({ color, text, caminhoVideo, caminhoThumb, colorBar, colorText }
   return (
     <Container onContextMenu={(e) => e.preventDefault()}>
       {
-        !played && (
+ 
+  !played && caminhoThumb &&  (
            <Thumb src={caminhoThumb}  onClick={handlePlay} />
         )
       }
@@ -82,7 +83,7 @@ export default ({ color, text, caminhoVideo, caminhoThumb, colorBar, colorText }
           onClick={handleRestartAndUnmuted}
         >
           <span style={{ fontSize: 18, fontWeight: 500, color: colorText }}>
-            Seu video já começou
+          {textSuperior ? textSuperior : "Seu video já começou"}
           </span>
           <img
             src={Sound}
@@ -92,7 +93,7 @@ export default ({ color, text, caminhoVideo, caminhoThumb, colorBar, colorText }
           />
           {/* <FaVolumeMute size={50}/> */}
           <span style={{ fontSize: 20, fontWeight: 500, color: colorText }}>
-            {text !== "" ? text : "Ativar o som"}
+            {textInferior ? textInferior : "Ativar o som"}
           </span>
         </Play>
       )}

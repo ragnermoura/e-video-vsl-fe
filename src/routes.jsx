@@ -11,6 +11,7 @@ import FullVideoPage from "./pages/Dashboard/FullVideoPage";
 import Afiliado from "./pages/Dashboard/Afiliado";
 import Obrigado from "./pages/Obrigado";
 import Home from "./pages/Home";
+import Edicao from "./pages/Dashboard/edicao";
 
 
 
@@ -27,6 +28,7 @@ export default() => {
             <Route path="/area-criacao" element={<Create/>} />
             <Route path="/meus-videos" element={<MeusVideos/>} />
             <Route path="/video/:id_video" element={<VideoPage/>} />
+            <Route path="/edicao/:id_video" element={<Edicao/>} />
             <Route path="/full-video/:id_video" element={<FullVideoPage/>} />
             <Route path="/afiliados" element={<Afiliado/>} />
         </Routes>

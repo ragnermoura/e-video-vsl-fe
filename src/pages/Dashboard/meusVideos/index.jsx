@@ -24,16 +24,16 @@ export default () => {
 
     return (
         <Container onContextMenu={e => e.preventDefault()}>
- <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
+ <div className="layout-wrapper layout-content-navbar">
+        <div className="layout-container">
 
 
 <MasterMenu/>
-<div class="layout-page">
+<div className="layout-page">
     
-<div class="content-wrapper">
-              <div class="container-xxl flex-grow-1 container-p-y">
-                <div class="row">
+<div className="content-wrapper">
+              <div className="container-xxl flex-grow-1 container-p-y">
+                <div className="row">
                   
      {
          video?.map(item => (<a key={item?.id_video} href={`/video/${item?.id_video}`} className="link col-md-3"><img className="col-12" src={item?.thumb}/></a>))

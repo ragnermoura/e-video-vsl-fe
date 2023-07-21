@@ -27,6 +27,18 @@ export const videoApi = {
 
     },
 
+    updateVideo: async (id_video,data) => {
+
+        return await api.patch(`/videos/upload/${id_video}`, data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                Accept: "application/json",
+            }
+        }
+        )
+
+    },
+
     getVideos: async (id_user) => {
 
         return await api.get(`/videos/get/${id_user}`, {

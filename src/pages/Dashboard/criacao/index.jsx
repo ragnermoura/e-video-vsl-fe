@@ -2,22 +2,26 @@ import { Container } from "./styles";
 import MasterMenu from "../../../components/masterMenu";
 import NavBar from "../../../components/navBar";
 import Footer from "../../../components/footer";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Video from "../../../components/Video";
 import { videoApi } from "../../../services/video";
-
+import { ToastContainer, toast } from "react-toastify";
+import { Oval } from "react-loader-spinner";
 export default () => {
   const [color, setColor] = useState("#f03939");
   const [colorBar, setColorBar] = useState("#4539f0");
   const [colorText, setColorText] = useState("#ffffff");
-  const [pathVideo, setPathVideo] = useState('')
-  const [pathImage, setPathImage] = useState('')
-  const [image, setImage] = useState(null)
-  const [video, setVideo] = useState(null)
-  const [text, setText] = useState('')
+  const [pathVideo, setPathVideo] = useState("");
+  const [pathImage, setPathImage] = useState("");
+  const [image, setImage] = useState(null);
+  const [video, setVideo] = useState(null);
+  const [textInferior, setTextInferior] = useState("");
+  const [textSuperior, setTextSuperior] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate();
 
- /*  function urlToBlob(url) {
+  /*  function urlToBlob(url) {
     return fetch(url)
       .then(response => response.blob());
   }
@@ -36,70 +40,86 @@ export default () => {
   }, []) */
 
   const handleUpload = async () => {
+    setIsLoading(true)
+    if (!image) {
+      setIsLoading(false)
+      return toast.error("Você precisa escolher uma thumb!", {
+        theme: "colored",
+      });
+    }
 
     const formData = new FormData();
 
-    const getId = await JSON.parse(localStorage.getItem('userId'))
-    console.log(getId)
-    formData.append('video', video)
-    formData.append('id', getId)
-    formData.append('cor', color)
-    formData.append('corBarra', colorBar)
-    formData.append('text', text)
-    formData.append('corText', colorText)
+    const getId = localStorage.getItem("userId");
+    console.log(getId);
+    formData.append("video", video);
+    formData.append("id", getId);
+    formData.append("cor", color);
+    formData.append("corBarra", colorBar);
+    formData.append("textInferior", textInferior);
+    formData.append("textSuperior", textSuperior);
+    formData.append("corText", colorText);
 
     const response = await videoApi.PostVideo(formData);
 
-    console.log('data', response?.data)
+    console.log("data", response?.data);
 
-    if(response?.data?.success){
-    const { id_video } = response?.data?.video
-      const formData2 = new FormData();
-      formData2.append('thumb', image)
+    if (response?.data?.success) {
+      if (image) {
+        const { id_video } = response?.data?.video;
+        const formData2 = new FormData();
+        formData2.append("thumb", image);
 
-      await videoApi.PostImageVideo(id_video, formData2)
+        const res = await videoApi.PostImageVideo(id_video, formData2);
+
+        if (res?.data?.success) {
+          navigate("/meus-videos");
+        }
+      } else {
+        navigate("/meus-videos");
+      }
     }
-
-
-  }
+  };
 
   return (
     <Container>
-      <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
+      <div className="layout-wrapper layout-content-navbar">
+        <div className="layout-container">
           <MasterMenu />
-          <div class="layout-page">
-           
-
-            <div class="content-wrapper">
-              <div class="container-xxl flex-grow-1 container-p-y">
-                <div class="row">
-               
-
-                  <div class="col-md-6">
-                    <div class="card mb-4">
-                      <h5 class="card-header">Área de criação</h5>
-                      <div class="card-body">
+          <div className="layout-page">
+            <div className="content-wrapper">
+              <div className="container-xxl flex-grow-1 container-p-y">
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="card mb-4">
+                      <h5 className="card-header">Área de criação</h5>
+                      <div className="card-body">
                         <div>
                           <label
                             for="defaultFormControlInput"
-                            class="form-label"
+                            className="form-label"
                           >
                             Insira seu vídeo
                           </label>
                           <input
                             type="file"
                             accept="video/*"
-                            class="form-control"
+                            className="form-control"
                             id="defaultFormControlInput"
                             placeholder="John Doe"
                             aria-describedby="defaultFormControlHelp"
-                            onChange={e => {setVideo(e.target.files[0])
-                            console.log('video ', e.target.files[0])
-                            setPathVideo(URL.createObjectURL(e.target.files[0]))
+                            onChange={(e) => {
+                              setVideo(e.target.files[0]);
+                              console.log("video ", e.target.files[0]);
+                              setPathVideo(
+                                URL.createObjectURL(e.target.files[0])
+                              );
                             }}
                           />
-                          <div id="defaultFormControlHelp" class="form-text">
+                          <div
+                            id="defaultFormControlHelp"
+                            className="form-text"
+                          >
                             O Video não pode ser mais que 800mb.
                           </div>
                         </div>
@@ -107,45 +127,72 @@ export default () => {
                         <div className="mt-3">
                           <label
                             for="defaultFormControlInput"
-                            class="form-label"
+                            className="form-label"
                           >
                             Insira uma thumb
                           </label>
                           <input
                             type="file"
                             accept="image/*"
-                            class="form-control"
+                            className="form-control"
                             id="defaultFormControlInput"
                             placeholder="John Doe"
                             aria-describedby="defaultFormControlHelp"
-                            onChange={e => {setImage(e.target.files[0])
-                              setPathImage(URL.createObjectURL(e.target.files[0]))
-                              }}
+                            onChange={(e) => {
+                              setImage(e.target.files[0]);
+                              setPathImage(
+                                URL.createObjectURL(e.target.files[0])
+                              );
+                            }}
+                          />
+                          <div
+                            id="defaultFormControlHelp"
+                            className="form-text"
+                          >
+                            A imagem aparecerá quando o vídeo ficar pausado.
+                          </div>
+                        </div>
+
+                        <div className="mt-4">
+                          <label
+                            for="defaultFormControlInput"
+                            className="form-label"
+                          >
+                            Digite o texto de espera superior
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="defaultFormControlInput"
+                            maxLength={20}
+                            placeholder="Seu video já começou"
+                            aria-describedby="defaultFormControlHelp"
+                            onChange={(e) => setTextSuperior(e.target.value)}
                           />
                         </div>
 
                         <div className="mt-4">
                           <label
                             for="defaultFormControlInput"
-                            class="form-label"
+                            className="form-label"
                           >
-                            Digite um texto espera
+                            Digite o texto de espera inferior
                           </label>
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="defaultFormControlInput"
                             maxLength={20}
                             placeholder="Ative o Volume"
                             aria-describedby="defaultFormControlHelp"
-                            onChange={e => setText(e.target.value)}
+                            onChange={(e) => setTextInferior(e.target.value)}
                           />
                         </div>
 
                         <div className="mt-4">
                           <label
                             for="defaultFormControlInput"
-                            class="form-label"
+                            className="form-label"
                           >
                             Escolha a cor do texto
                           </label>
@@ -153,7 +200,7 @@ export default () => {
                             type="color"
                             value={colorText}
                             onChange={(e) => setColorText(e?.target?.value)}
-                            class="form-control"
+                            className="form-control"
                             id="defaultFormControlInput"
                             placeholder="John Doe"
                             aria-describedby="defaultFormControlHelp"
@@ -163,7 +210,7 @@ export default () => {
                         <div className="mt-4">
                           <label
                             for="defaultFormControlInput"
-                            class="form-label"
+                            className="form-label"
                           >
                             Escolha a cor dos controles
                           </label>
@@ -171,7 +218,7 @@ export default () => {
                             type="color"
                             value={color}
                             onChange={(e) => setColor(e?.target?.value)}
-                            class="form-control"
+                            className="form-control"
                             id="defaultFormControlInput"
                             placeholder="John Doe"
                             aria-describedby="defaultFormControlHelp"
@@ -180,7 +227,7 @@ export default () => {
                         <div className="mt-4">
                           <label
                             for="defaultFormControlInput"
-                            class="form-label"
+                            className="form-label"
                           >
                             Escolha a cor da barra de progresso
                           </label>
@@ -188,38 +235,64 @@ export default () => {
                             type="color"
                             value={colorBar}
                             onChange={(e) => setColorBar(e?.target?.value)}
-                            class="form-control"
+                            className="form-control"
                             id="defaultFormControlInput"
                             placeholder="John Doe"
                             aria-describedby="defaultFormControlHelp"
                           />
                         </div>
+                        {!isLoading && (
+                          <button
+                            style={{ width: "100%", marginTop: 30 }}
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={handleUpload}
+                          >
+                            Carregar
+                          </button>
+                        )}
 
-                        <button
-                          style={{ width: "100%", marginTop: 30 }}
-                          type="button"
-                          class="btn btn-primary"
-                          onClick={handleUpload}
-                        >
-                          Carregar
-                        </button>
+                        {
+                          isLoading && (
+                         <div className="spinner">
+
+                            <Oval
+                            strokeWidth={4}
+                            strokeWidthSecondary={4}
+                            width={60}
+                            color="#f13a3a"
+                            secondaryColor="#942525"
+                            height={60}
+                            />
+                            </div>
+                         
+                          )
+                        }
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <Video caminhoVideo={pathVideo} colorText={colorText} colorBar={colorBar} caminhoThumb={pathImage} text={text} color={color} />
-            
+                  <div className="col-md-6">
+                    <Video
+                      caminhoVideo={pathVideo}
+                      colorText={colorText}
+                      colorBar={colorBar}
+                      caminhoThumb={pathImage}
+                      textInferior={textInferior}
+                      textSuperior={textSuperior}
+                      color={color}
+                    />
                   </div>
                 </div>
               </div>
 
               <Footer />
 
-              <div class="content-backdrop fade"></div>
+              <div className="content-backdrop fade"></div>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </Container>
   );
 };

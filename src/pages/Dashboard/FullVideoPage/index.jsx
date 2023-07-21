@@ -4,8 +4,8 @@ import NavBar from "../../../components/navBar";
 import Footer from "../../../components/footer";
 import { useParams } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
-import Video from "../../../components/Video";
 import { videoApi } from "../../../services/video";
+import FullVideo from "../../../components/FullVideo";
 
 export default () => {
   const [color, setColor] = useState("#f03939");
@@ -48,7 +48,14 @@ useEffect(useCallback(
     <Container>
     
 
-                      <Video color={video?.cor} text={video?.text} caminhoThumb={video?.thumb} caminhoVideo={blobPath} />
+                      <FullVideo 
+                      color={video?.cor}
+                      textInferior={video?.textInferior}
+                      textSuperior={video?.textSuperior}
+                      colorText={video?.corText}
+                      colorBar={video?.corBar}
+                      caminhoThumb={video?.thumb}
+                             caminhoVideo={blobPath} />
                     
     </Container>
   );
