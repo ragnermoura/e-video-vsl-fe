@@ -41,6 +41,14 @@ export default () => {
 
   const handleUpload = async () => {
     setIsLoading(true)
+    
+
+    if(!video){
+      setIsLoading(false)
+      return toast.error("Você precisa escolher um video!", {
+        theme: "colored",
+      });
+    }
     if (!image) {
       setIsLoading(false)
       return toast.error("Você precisa escolher uma thumb!", {
@@ -50,7 +58,7 @@ export default () => {
 
     const formData = new FormData();
 
-    const getId = localStorage.getItem("userId");
+    const getId =  sessionStorage.getItem("userId");
     console.log(getId);
     formData.append("video", video);
     formData.append("id", getId);
@@ -60,7 +68,7 @@ export default () => {
     formData.append("textSuperior", textSuperior);
     formData.append("corText", colorText);
 
-    const response = await videoApi.PostVideo(formData);
+    const response = await videoApi.PostVideo(formData, getId);
 
     console.log("data", response?.data);
 
@@ -86,10 +94,10 @@ export default () => {
       <div className="layout-wrapper layout-content-navbar">
         <div className="layout-container">
           <MasterMenu />
-          <div className="layout-page">
+          <div className="sm-mt layout-page">
             <div className="content-wrapper">
               <div className="container-xxl flex-grow-1 container-p-y">
-                <div className="row">
+                <div className="row coluna">
                   <div className="col-md-6">
                     <div className="card mb-4">
                       <h5 className="card-header">Área de criação</h5>
@@ -106,22 +114,21 @@ export default () => {
                             accept="video/*"
                             className="form-control"
                             id="defaultFormControlInput"
+                           
                             placeholder="John Doe"
                             aria-describedby="defaultFormControlHelp"
                             onChange={(e) => {
-                              setVideo(e.target.files[0]);
-                              console.log("video ", e.target.files[0]);
+                              const file = e.target.files[0]
+                              
+                             
+                              setVideo(file);
+                              console.log("video ", file);
                               setPathVideo(
-                                URL.createObjectURL(e.target.files[0])
+                                URL.createObjectURL(file)
                               );
                             }}
                           />
-                          <div
-                            id="defaultFormControlHelp"
-                            className="form-text"
-                          >
-                            O Video não pode ser mais que 800mb.
-                          </div>
+                        
                         </div>
 
                         <div className="mt-3">
@@ -264,6 +271,8 @@ export default () => {
                             secondaryColor="#942525"
                             height={60}
                             />
+
+                            <h6>Pode ocorrer uma certa demora devido ao tamanho do vídeo.</h6>
                             </div>
                          
                           )

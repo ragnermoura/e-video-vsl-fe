@@ -7,8 +7,8 @@ export default () => {
 
   const handleSave = (id, id_sistema) => {
     console.log('id', id)
-    localStorage.setItem('plano_id', id)
-    localStorage.setItem('plano_id_sistema', id_sistema)
+     sessionStorage.setItem('plano_id', id)
+     sessionStorage.setItem('plano_id_sistema', id_sistema)
     navigate('/pagamento')
   }
 

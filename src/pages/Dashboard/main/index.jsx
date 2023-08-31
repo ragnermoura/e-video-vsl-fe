@@ -52,8 +52,9 @@ export default () => {
   const [name, setName] = useState('')
 
   useEffect( () => {
-
-    setName(localStorage.getItem('nome_usuario'))
+    const {nome} = JSON.parse( sessionStorage.getItem('user'))
+    
+    setName(nome)
 
   },[])
 
@@ -62,7 +63,7 @@ export default () => {
       <div className="layout-wrapper layout-content-navbar">
         <div className="layout-container">
           <MasterMenu />
-          <div className="layout-page">
+          <div className="sm-mt layout-page">
             <div className="content-wrapper">
               <div className="container-xxl flex-grow-1 container-p-y">
                 <div className="row">
@@ -95,9 +96,9 @@ export default () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-4 col-md-4 order-1">
+                  <div className="col-6 col-lg-4 col-md-4 order-1">
                     <div className="row">
-                      <div className="col-lg-12 col-md-12 col-6 mb-4">
+                      <div className="col-12 col-lg-12 col-md-12  mb-4">
                         <div className="card">
                           <div className="card-body">
                             <div className="card-title d-flex align-items-start justify-content-between"></div>
@@ -124,9 +125,9 @@ export default () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-4 col-md-4 order-1">
+                  <div className="col-6 col-lg-4 col-md-4 order-1">
                     <div className="row">
-                      <div className="col-lg-12 col-md-12 col-6 mb-4">
+                      <div className="col-12 col-lg-12 col-md-12  mb-4">
                         <div className="card">
                           <div className="card-body">
                             <div className="card-title d-flex align-items-start justify-content-between"></div>
@@ -170,21 +171,17 @@ export default () => {
                     </div>
                   </div>
 
-                  <div className="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-                    <div className="row"></div>
-                    <div className="row"></div>
-                  </div>
                 </div>
-                <div className="row">
-                  <div className="col-4 mb-4">
-                    <a href="#" target="_blank">
+                <div className="row content-img">
+                  <div className=" col-10 col-md-4 mb-4">
+                    <a href="https://evideovsl.com.br/campanha/" target="_blank">
                       <div className="card">
                         <img src={Image1} alt="" srcset="" />
                       </div>
                     </a>
                   </div>
 
-                  <div className="col-4 mb-4">
+                  <div className=" col-10 col-md-4 mb-4">
                     <a
                       href="https://mktdigitalpro.net/pagesbraip/?pv=prox1jwv&af=afiz23d86"
                       target="_blank"
@@ -195,7 +192,7 @@ export default () => {
                     </a>
                   </div>
 
-                  <div className="col-4 mb-4">
+                  <div className=" col-10 col-md-4 mb-4">
                     <a
                       href="https://plrpremium.net/versao-2023/?pv=pro97mo1&af=afiy167j7"
                       target="_blank"
@@ -214,7 +211,8 @@ export default () => {
                         </div>
                       </div>
                       <div className="card-body">
-                        <div className="row mt-3">
+                        <div className="row mt-3 ">
+                        <div className="row mt-3 flexWrap">
                           <div className="col-4 mb-4">
                             <div className="card">
                               <div className="card-body">
@@ -282,6 +280,7 @@ export default () => {
                               </div>
                             </div>
                           </div>
+                          </div>
 
                           <h4 className="card-title m-0 me-2 text-center">
                             <strong> Ranking de indicações</strong>
@@ -320,12 +319,12 @@ export default () => {
                         </h4>
                       </div>
                       <div className="card-body">
-                        <div className="row">
-                          <div className="col-3 mb-4">
+                        <div className="flexWrapVenda">
+                          <div className="col-4 col-md-3 mb-4">
                             <div className="card">
                               <div className="card-body">
                                 <div className="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                                  <div className="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                  <div className="d-md-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div className="card-title">
                                       <h5 className="text-nowrap mb-2">Vendas</h5>
                                       <span className="badge bg-label-success rounded-pill">
@@ -341,11 +340,11 @@ export default () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-3 mb-4">
+                          <div className="col-4 col-md-3 mb-4">
                             <div className="card">
                               <div className="card-body">
                                 <div className="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                                  <div className="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                  <div className="d-md-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div className="card-title">
                                       <h5 className="text-nowrap mb-2">Vendas</h5>
                                       <span className="badge bg-label-warning rounded-pill">
@@ -361,11 +360,11 @@ export default () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-3 mb-4">
+                          <div className="col-4 col-md-3 mb-4">
                             <div className="card">
                               <div className="card-body">
                                 <div className="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                                  <div className="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                  <div className="d-md-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div className="card-title">
                                       <h5 className="text-nowrap mb-2">Venda</h5>
                                       <span className="badge bg-label-warning rounded-pill">
@@ -381,11 +380,11 @@ export default () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-3 mb-4">
+                          <div className="col-4 col-md-3 mb-4">
                             <div className="card">
                               <div className="card-body">
                                 <div className="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                                  <div className="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                  <div className="d-md-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div className="card-title">
                                       <h5 className="text-nowrap mb-2">Venda</h5>
                                       <span className="badge bg-label-warning rounded-pill">

@@ -14,8 +14,19 @@ export default () => {
   const { id_video } = useParams();
   const navigate = useNavigate();
   const [showCode, setShowCode] = useState(false);
-  function urlToBlob(url) {
-    return fetch(url).then((response) => response.blob());
+ 
+  const handleDeleteVideo = async () => {
+
+    const res = await videoApi.deleteVideo(id_video)
+    if (res?.data?.success) {
+
+      navigate('/meus-videos')
+
+     }
+  }
+
+  const handleMetricas = () => {
+    navigate(`/metricas/${id_video}`)
   }
 
   const handleGetVideos = async () => {
@@ -23,14 +34,6 @@ export default () => {
     console.log(res?.data?.response);
     setVideo(res?.data?.response);
 
-    urlToBlob(res?.data?.response?.video)
-      .then((blob) => {
-        // Use o objeto Blob aqui
-        setBlobPath(URL.createObjectURL(blob));
-      })
-      .catch((error) => {
-        console.error("Ocorreu um erro ao converter o URL para Blob:", error);
-      });
   };
 
   const handleEdit = () => {
@@ -55,7 +58,7 @@ export default () => {
       <div className="layout-wrapper layout-content-navbar">
         <div className="layout-container">
           <MasterMenu />
-          <div className="layout-page">
+          <div className=" sm-mt layout-page">
             <div className="content-wrapper">
               <div className="container-xxl flex-grow-1 container-p-y">
                 <div className="row">
@@ -64,34 +67,40 @@ export default () => {
                       <h5 className="card-header">Área do Video</h5>
                       <div className="card-body">
                         <div className="row">
-                          <div className="col-8">
+                          <div className="col-12 col-md-8">
                             <Video
                               color={video?.cor}
                               textInferior={video?.textInferior}
                               textSuperior={video?.textSuperior}
                               colorText={video?.corText}
                               colorBar={video?.corBar}
+                              caminhoFrame={video?.frame}
                               caminhoThumb={video?.thumb}
-                              caminhoVideo={blobPath}
+                              caminhoVideo={video?.video}
                             />
                           </div>
-                          <div className="col-4">
+                          <div className="col-12 col-md-4">
                             <ButtonArea>
                               <Button onClick={handleEdit}>Editar</Button>
-                              <Button>Deletar Video</Button>
+                              <Button onClick={handleMetricas}>Métricas</Button>
 
                               <Button onClick={handleShowCode}>
                                 Gerar código de incorporação
                               </Button>
+
+                              <Button onClick={handleDeleteVideo}>Deletar Video</Button>
                             </ButtonArea>
                             {showCode && (
                               <div>
+                            
+    
+
                                 <h5>Copie o link de incorporação</h5>
                                 <code>
-                                  &lt;iframe
-                                  src="https://app.evideovsl.com.br/full-video/
-                                  {id_video}" width={"100%"} height={"800px"}{" "}
-                                  frameborder="0"&gt;&lt;/iframe&gt;
+                                  &lt;div style="padding:56.25% 0 0 0;position:relative;"&gt;&lt;iframe
+                                  src="https://stream.evideovsl.com.br/?video={id_video}" 
+                                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0"&gt;&lt;/iframe&gt;
+                                  &lt;/div&gt;
                                 </code>
                               </div>
                             )}

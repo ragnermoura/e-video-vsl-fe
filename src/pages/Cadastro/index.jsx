@@ -24,7 +24,7 @@ console.log('resquest')
     console.log(res?.data)
     if(res?.data?.success){
       console.log('loguei')
-      localStorage.setItem('userId', res?.data.usuarioCriado.id_user)
+       sessionStorage.setItem('userId', res?.data.usuarioCriado.id_user)
 
       navigate('/')
 

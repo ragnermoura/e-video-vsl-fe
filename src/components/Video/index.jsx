@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Container, Play, Progress, Thumb, Video } from "./styles";
 import { FaPlay, FaVolumeMute } from "react-icons/fa";
 import Sound from "../../assets/img/sound.svg";
-export default ({ color, textInferior, textSuperior, caminhoVideo, caminhoThumb, colorBar, colorText }) => {
+export default ({ color, textInferior, textSuperior, caminhoFrame,caminhoVideo, caminhoThumb, colorBar, colorText }) => {
   const [currentProgress, setCurrentProgress] = useState(0);
   const videoRef = useRef(null);
   const video = videoRef.current;
@@ -13,14 +13,15 @@ export default ({ color, textInferior, textSuperior, caminhoVideo, caminhoThumb,
   const [atual, setAtual] = useState(0); 
 
   const handleUpdateProgress = () => {
-    if(video?.currentTime < 20){
-      
+    if(Number(atual) < (video.duration  *0.15)){
+      console.log(video.duration *0.10)
       let progress = (video?.currentTime / video?.duration) * 300;
       setCurrentProgress(progress?.toFixed(1));
       setAtual(progress)
     } else {
-
-      let progress = Number(atual) + (video?.currentTime / video?.duration) * 100
+      console.log(atual)
+      const current_atual = Number(atual)
+      let progress = current_atual - (current_atual/4) + (video?.currentTime / video?.duration) * 100
 
       setCurrentProgress(progress?.toFixed(1));
     }
@@ -60,11 +61,12 @@ export default ({ color, textInferior, textSuperior, caminhoVideo, caminhoThumb,
            <Thumb src={caminhoThumb}  onClick={handlePlay} />
         )
       }
-    
+      
+     
           <Video
         autoPlay
         muted
-        poster={caminhoThumb}
+        poster={caminhoFrame}
         src={caminhoVideo}
         ref={videoRef}
         onTimeUpdate={handleUpdateProgress}

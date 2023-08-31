@@ -1,12 +1,41 @@
 import { Container } from "./styles";
 import Logo from "../../assets/img/logo.png";
-
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { IoMenu } from "react-icons/io5";
+import { useAuth } from "../../context/authProvider";
 export default () => {
+  const navigate = useNavigate()
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
+  const auth = useAuth()
+  const handleResize = () => {
+    setWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    // Adiciona o evento de redimensionamento para atualizar a largura quando a janela é redimensionada
+    window.addEventListener('resize', handleResize);
+
+    // Remove o evento de redimensionamento quando o componente é desmontado
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <Container>
+    <Container open={isOpen}>
+{width <= 995 &&
+<IoMenu style={{marginLeft: 20, marginTop: 20}} onClick={handleToggle} size={48}/>
+}
+
       <aside
-        id="layout-menu"
-        className="layout-menu menu-vertical menu bg-menu-theme"
+        id=""
+        className="menu-vertical menu bg-menu-theme"
       >
         <div className="app-brand demo">
           <a href="" className="app-brand-link">
@@ -15,18 +44,14 @@ export default () => {
                 src={Logo}
                 alt=""
                 srcset=""
-                className="img-fluid"
-                style={{ width: 160 }}
+                className="img-fluid logo"
               />
+              
             </span>
           </a>
-
-          <a
-            href="javascript:void(0);"
-            className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"
-          >
-            <i className="bx bx-chevron-left bx-sm align-middle"></i>
-          </a>
+          {width <= 995 &&
+<IoMenu onClick={handleToggle} size={48}/>
+}
         </div>
 
         <div className="menu-inner-shadow"></div>
@@ -40,7 +65,7 @@ export default () => {
           </li>
 
           <li className="menu-item">
-            <a href="#" className="menu-link">
+            <a href="https://evideovsl.com.br/tutoriais/" target="_blank" className="menu-link">
               <i className="menu-icon tf-icons bx bx-video"></i>
               <div data-i18n="Basic">Tutorial</div>
             </a>
@@ -62,42 +87,37 @@ export default () => {
               <div data-i18n="Account Settings">Meus vídeos</div>
             </a>
           </li>
-          <li className="menu-item">
-            <a href="/meus-videos" className="menu-link menu-toggle">
-              <i className="menu-icon tf-icons bx bx-chart"></i>
-              <div data-i18n="Account Settings">Métricas</div>
-            </a>
-          </li>
+         
 
           <li className="menu-item">
             <a href="javascript:void(0);" className="menu-link menu-toggle">
               <i className="menu-icon tf-icons bx bx-lock"></i>
-              <div data-i18n="Misc">Teste A-B |<small className="text-primary"> Em breve</small></div>
+              <div data-i18n="Misc">Teste A-B | <small className="text-primary">Em criação</small></div>
             </a>
           </li>
           <li className="menu-item">
             <a href="javascript:void(0);" className="menu-link menu-toggle">
               <i className="menu-icon tf-icons bx bx-lock"></i>
-              <div data-i18n="Misc">Pixel | <small className="text-primary"> Em breve</small></div>
+              <div data-i18n="Misc">Pixel | <small className="text-primary">Em criação</small></div>
             </a>
           </li>
 
         
           <li className="menu-header small text-uppercase">
-            <span className="menu-header-text">Vitrine de Produtos</span>
+            <span className="menu-header-text">Vitrine de Produtos </span>
           </li>
 
           <li className="menu-item">
             <a href="#" className="menu-link menu-toggle">
               <i className="menu-icon tf-icons bx bx-store"></i>
-              <div data-i18n="Misc">Nossos Produtos</div>
+              <div data-i18n="Misc">Nossos Produtos |<small className="text-primary"><br/>Em breve</small></div>
             </a>
           </li>
           
           <li className="menu-item">
             <a href="#" className="menu-link menu-toggle">
               <i className="menu-icon tf-icons bx bx-store"></i>
-              <div data-i18n="Misc">Produtos Parceiros</div>
+              <div data-i18n="Misc">Produtos Parceiros |<small className="text-primary"> Em breve</small></div>
             </a>
           </li>
         
@@ -107,17 +127,23 @@ export default () => {
             <span className="menu-header-text">Pessoal</span>
           </li>
 
+      
+          
           <li className="menu-item">
-            <a href="#" className="menu-link">
+            <a href="/meu-perfil" className="menu-link menu-toggle">
               <i className="menu-icon tf-icons bx bx-user"></i>
-              <div data-i18n="Basic">Meu perfil</div>
+              <div data-i18n="User interface">Meu perfil</div>
             </a>
-          </li>
-
+          </li>  
+       
           <li className="menu-item">
-            <a href="#" className="menu-link menu-toggle">
-              <i className="menu-icon tf-icons bx bx-dollar"></i>
-              <div data-i18n="User interface">Meu Plano</div>
+            <a  onClick={() => {
+               sessionStorage.clear()
+              auth?.logout()
+              navigate('/')
+            }} className="menu-link">
+              <i className="menu-icon tf-icons bx bx-door-open"></i>
+              <div data-i18n="Basic">Logout</div>
             </a>
           </li>
 
@@ -127,7 +153,7 @@ export default () => {
 
           <li className="menu-item">
             <a
-              href="#"
+              href="https://api.whatsapp.com/send?phone=5571982414747&text=Ol%C3%A1%20quero%20falar%20com%20suporte%20do%20e-video%20vsl"
               className="menu-link"
             >
               <i className="menu-icon tf-icons bx bx-phone"></i>

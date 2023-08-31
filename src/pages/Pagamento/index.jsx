@@ -36,9 +36,9 @@ const navigate = useNavigate()
 
   const handleSubcribe = async (type) => {
 
-    const idPlano =  localStorage.getItem('plano_id')
-    const idUser =   localStorage.getItem('idUser')
-    const idPlanoSistema =  localStorage.getItem('plano_id_sistema')
+    const idPlano =   sessionStorage.getItem('plano_id')
+    const idUser =    sessionStorage.getItem('idUser')
+    const idPlanoSistema =   sessionStorage.getItem('plano_id_sistema')
 
     if(type == 'boleto') {
       const body = {

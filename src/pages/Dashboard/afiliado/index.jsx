@@ -10,7 +10,7 @@ export default () => {
       <div className="layout-wrapper layout-content-navbar">
         <div className="layout-container">
           <MasterMenu />
-          <div className="layout-page">
+          <div className=" ">
             <NavBar />
 
             <div className="content-wrapper">

@@ -3,9 +3,9 @@ import { api } from "../config/config"
 export const videoApi = {
 
 
-    PostVideo: async (data) => {
+    PostVideo: async (data,id_user) => {
 
-        return await api.post('/videos/upload-video', data, {
+        return await api.post(`/videos/upload-video/${id_user}`, data, {
             headers: {
                 "Content-Type": "multipart/form-data",
                 Accept: "application/json",
@@ -31,7 +31,7 @@ export const videoApi = {
 
         return await api.patch(`/videos/upload/${id_video}`, data, {
             headers: {
-                "Content-Type": "multipart/form-data",
+                'Content-Type': "application/json",
                 Accept: "application/json",
             }
         }
@@ -61,7 +61,18 @@ export const videoApi = {
         }
         )
 
-    }
+    },
 
+    deleteVideo: async (id_video) => {
+
+        return await api.delete(`/videos/delete/${id_video}`, {
+            headers: {
+                'Content-Type': "application/json",
+                Accept: "application/json",
+            }
+        }
+        )
+
+    }
 
 }

@@ -8,4 +8,10 @@ background-color: #FFF9;
     margin-left: 10px;
 }
 
+.textEsqueci{
+
+    color: #566a7f;
+
+}
+
 `

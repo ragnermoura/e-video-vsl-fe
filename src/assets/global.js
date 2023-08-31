@@ -26,6 +26,17 @@ export const GlobalStyle = createGlobalStyle`
   &::-webkit-scrollbar-thumb:hover {
     background: #f13a3a;
   }
+
+  
+@media only screen and (max-width: 995px) {
+
+.sm-mt{
+
+    margin-top: 60px;
+
+}
+}
+
   }
 
   a{

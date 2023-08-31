@@ -10,7 +10,7 @@ export default () => {
     const [video, setVideo] = useState([])
 
     const handleGetVideos = async () => {
-        const id_user = localStorage.getItem('userId')
+        const id_user =  sessionStorage.getItem('userId')
         const res =  await videoApi.getVideos(id_user)
         console.log(res?.data?.response)
         setVideo(res?.data?.response)
@@ -29,14 +29,14 @@ export default () => {
 
 
 <MasterMenu/>
-<div className="layout-page">
+<div className="sm-mt">
     
 <div className="content-wrapper">
               <div className="container-xxl flex-grow-1 container-p-y">
                 <div className="row">
                   
      {
-         video?.map(item => (<a key={item?.id_video} href={`/video/${item?.id_video}`} className="link col-md-3"><img className="col-12" src={item?.thumb}/></a>))
+         video?.map(item => (<a key={item?.id_video} href={`/video/${item?.id_video}`} className="link col-md-3"><img className="col-12" alt src={ item?.thumb ? item?.thumb : item?.frame}/></a>))
         }
 
         </div>

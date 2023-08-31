@@ -2,9 +2,10 @@ import { Container } from "./styles";
 import Logo from "../../assets/img/logo.png";
 import { useState } from "react";
 import { authApi } from "../../services/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from "../../context/authProvider";
 export default () => {
   const navigate = useNavigate();
 
@@ -12,17 +13,23 @@ export default () => {
     email: "",
     senha: "",
   });
+const auth = useAuth()
+const location = useLocation()
+
+const redirectPath = location.state?.path || '/dashboard-main'
 
   const handleLogin = async () => {
     const res = await authApi.login(user);
     if (res?.data?.success) {
       console.log("loguei");
-      localStorage.setItem("userId", res?.data?.user_id);
-      localStorage.setItem("token", res?.data?.token);
-      localStorage.setItem('nome_usuario', res?.data?.name)
-      navigate("/dashboard-main");
+      auth.login(res?.data?.user)
+      sessionStorage.setItem("userId", res?.data?.user_id);
+      sessionStorage.setItem("token", res?.data?.token);
+      sessionStorage.setItem('user', JSON.stringify(res?.data?.user))
+      sessionStorage.setItem('plano', JSON.stringify(res?.data?.plano))
+      navigate(redirectPath, {replace: true, });
     } else {
-      toast.error(res?.mensagem, {
+      toast.error(res?.message, {
         theme: 'colored'
       })
     }
@@ -36,12 +43,12 @@ export default () => {
             <div className="card">
               <div className="card-body">
                 <div className="app-brand justify-content-center">
-                  <a href="#" className="app-brand-link gap-2">
+                  <a href="#"  className="app-brand-link gap-2">
                     <span className="app-brand-logo demo">
                       <img
                         src={Logo}
                         alt=""
-                        srcset=""
+                        srcSet=""
                         className="img-fluid"
                         style={{ width: 200 }}
                       />
@@ -64,7 +71,7 @@ export default () => {
                 Você saiu... Volte logo!
                 </div>
                 <div className="mb-3">
-                  <label for="email" className="form-label">
+                  <label htmlFor="email" className="form-label">
                     Seu e-mail
                   </label>
                   <input
@@ -76,12 +83,12 @@ export default () => {
                     onChange={(e) =>
                       setUser({ ...user, email: e.target.value })
                     }
-                    autofocus
+                    autoFocus
                   />
                 </div>
                 <div className="mb-3 form-password-toggle">
                   <div className="d-flex justify-content-between">
-                    <label className="form-label" for="password">
+                    <label className="form-label" htmlFor="password">
                       Senha
                     </label>
                   </div>
@@ -97,22 +104,17 @@ export default () => {
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
                     />
-                    <span className="input-group-text cursor-pointer">
-                      <i className="bx bx-hide"></i>
-                    </span>
+                   
                   </div>
                 </div>
                 <div className="mb-3">
                   <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="remember-me"
-                    />
-                    <label className="form-check-label" for="remember-me">
-                      {" "}
-                      Lembre-me{" "}
-                    </label>
+                    
+                    <a href="/esqueci" className="textEsqueci" htmlFor="remember-me">
+                   
+                      Esqueci a senha
+
+                    </a>
                   </div>
                 </div>
                 <div className="mb-3">
@@ -123,13 +125,13 @@ export default () => {
                     Entrar
                   </button>
                 </div>
-
+{/* 
                 <p className="text-center">
                   <span>Não tem cadastro?</span>
                   <a href="/cadastro">
                     <span className="createCount">Crie sua conta aqui</span>
                   </a>
-                </p>
+                </p> */}
               </div>
             </div>
           </div>
